@@ -13,11 +13,13 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.moving = false;
 	this.curMoveSpeed = "normal";
 	this.movementSpeeds = {
-		"normal":200,
-		"sprint":250
+		"normal":150,
+		"sprint":260
 	}
 
 	this.health = 100;
+	this.stamina = 100;
+	this.requiredStaminaToStartRunning = 20;
 
 	this.isStabbing = false;
 	this.isInCooldown = false;
@@ -59,6 +61,14 @@ Player.prototype.stab = function() {
 	if (!this.isInCooldown && !this.isStabbing) {
 		this.isStabbing = true;
 		this.swordHitbox 		
+	}
+}
+
+Player.prototype.setPace = function(sprint) {
+	if (sprint && this.stamina > this.requiredStaminaToStartRunning) {
+		this.curMoveSpeed = "sprint";
+	} else {
+		this.curMoveSpeed = "normal"
 	}
 }
 
@@ -116,6 +126,19 @@ Player.prototype.update = function() {
 		}
 
 	} else {
+
+	if (this.curMoveSpeed == "sprinting" && this.stamina > 0) {
+		this.stamina -= 4;
+	} else if (this.curMoveSpeed == "sprinting") {
+		this.curMoveSpeed = "normal";
+	} else {
+		if (this.stamina <= 20) {
+			this.stamina += 1;
+		} else {
+			this.stamina += 5;
+			this.stamina = (this.stamina > 100) ? 100 : stamina;
+		}
+	}
 
 	if (this.isStabbing) {
 		this.stabTimer++;

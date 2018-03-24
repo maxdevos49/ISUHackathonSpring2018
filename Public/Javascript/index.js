@@ -6,7 +6,7 @@
 //init variables here
 var id;
 var myClient;
-var connectedCount = 0;
+var connectedCount = 1;
 var socket;
 
 var game;

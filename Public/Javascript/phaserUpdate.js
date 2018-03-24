@@ -24,9 +24,9 @@ function update() {
 	}
 
 	if (pad1.isDown(Phaser.Gamepad.XBOX360_LEFT_TRIGGER)) {
-		player.currMoveSpeed = "sprint";
+		player.setPace(true);
 	} else {
-		player.currMoveSpeed = "normal";
+		player.setPace(false);
 	}
 
 	if (pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
@@ -53,7 +53,7 @@ function update() {
 	if (shiftKey.isDown) {
 		player.currMoveSpeed = "sprint";
 	} else {
-		player.currMoveSpeed = "normal";
+		player.setPace(false);
 	}
 
 	if (spaceKeyStroke.isDown) {

@@ -19,6 +19,7 @@ var socket;
 console.log("Loaded this");
 
 var game;
+var cursors;
 
 //initial game start here called by html body
 function init(){
@@ -30,7 +31,7 @@ function init(){
 
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
-
+	cursors = game.input.keyboard.createCursorKeys();
 }
 
 function socketSetup(){

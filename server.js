@@ -8,7 +8,9 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const ip = require('ip');
+
 
 
 //let the server listen on port 80
@@ -37,3 +39,75 @@ app.get('/index.html', (req, res) => {
 
 
 });
+
+
+//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/Socket IO CODE\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+
+//init variables
+var user = [];
+var num_Id = [];
+var rmIndex;
+var client = 0;
+
+//process socket request
+io.on("connection", function(socket){//this runs on first connection
+
+  //give client a socket id
+  num_Id[client] = socket.id;
+
+  //create a object of the user info
+  //user[client] = new userInfo(socket.id, client);
+
+  //alert the console of a new user
+  console.log("new connection with index: " + client);
+
+  //reply for initial connection
+  socket.emit("connReply", user[client]);
+
+
+  //this is recieved from a newly connected client
+  socket.on("loadOtherUsers", function(data){
+
+    //user[data.clientNum].clientUserName = data.clientUserName;
+
+    //this is sent after a new client is connected and tells all the other clients to add there info
+    io.sockets.emit("loadOtherUsers", user);
+
+  });
+
+  //run this when someone disconnects
+  socket.on("disconnect", function(){
+
+    //loop through all the user objects
+    for (var i = 0; i < num_Id.length ;i++ ){
+
+      //check for the disconnected users object
+      if (num_Id[i] == socket.id){
+
+        //save the disconnecting users index
+        rmIndex = i;
+      }
+    }
+
+    //remove the disconnecting users object
+    delete user[rmIndex];
+    console.log("Disconnection with index: " + rmIndex);
+
+    //alert other clients of the disconnect
+    io.sockets.emit("userDisconnect", {
+      id: rmIndex
+    });
+
+  });
+
+  //increment this once per connection for client index/clientNum
+  client++;
+});
+
+//user object constructor
+// function userInfo(clientID,clientNum,userName){
+//   jshint validthis:true 
+//   this.clientID = clientID;
+//   this.clientNum = clientNum;
+//   this.clientUserName = userName;
+// }

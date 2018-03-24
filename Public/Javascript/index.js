@@ -1,5 +1,5 @@
 //linter settings
-/*global console:false, io:false, Phaser:false*/
+/*global console:false, io:false, Phaser:false, player:false*/
 //jshint unused:false
 
 
@@ -8,6 +8,7 @@ var userId;
 var myClient;
 var connectedCount = 0;
 var socket;
+var otherPlayers = [];
 
 
 var game;
@@ -35,7 +36,7 @@ function socketSetup(){
 
 		userId = data;
 		//emit a request for all of the other users info
-		socket.emit("loadOtherUsers", );
+		socket.emit("loadOtherUsers",player);
 
 	});
 
@@ -72,8 +73,12 @@ function socketSetup(){
 
 	socket.on("clientRecievePlayerData", function(data) {
 
-		//player.unpackData(data);
-		//console.log(data);
+
+		if(data.clientId !== userId){
+			player.unpackData(data);
+			console.log(data);
+		}
+		
 
 	});
 

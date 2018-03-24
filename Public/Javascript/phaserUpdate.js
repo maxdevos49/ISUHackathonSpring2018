@@ -34,14 +34,17 @@ function update() {
 	} else {
 
 		player.moving = true;
-
+		var clientData = {
+			"clientId" : userId,
+			"player" : player.getData()
+		};
+		socket.emit("serverRecievePlayerData", clientData);
 	}
 
-	var clientData = {
-		"clientId" : userId,
-		"player" : player.getData()
-	};
+	
 
-	socket.emit("serverRecievePlayerData", clientData);
+
+
+
 
 }

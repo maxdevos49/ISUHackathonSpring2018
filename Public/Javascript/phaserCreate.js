@@ -1,7 +1,7 @@
 //jshint unused:false
 /*global Player:false*/
 var player;
-var otherPlayers[];
+var otherPlayers = [];
 
 function create() {
 	"use strict";

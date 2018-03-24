@@ -1,6 +1,7 @@
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
 	game.physics.enable([this], Phaser.Physics.ARCADE);
+	this.enableBody = true;
 
 	this.scale.setTo(2, 2);
 	this.anchor.setTo(.5,.5);
@@ -32,9 +33,10 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 
 	game.add.existing(this);
 
-	this.sword = this.addChild(game.add.sprite(0, 0, "sword"));
+	this.sword = game.add.sprite(0, 0, "sword");
 	game.physics.enable([this.sword], Phaser.Physics.ARCADE);
 	this.sword.anchor.setTo(0.5, 0.5)
+	this.sword.enableBody = true;
 			
 	this.sword.damage = 10;
 	this.sword.knockbackForce = 500;
@@ -88,6 +90,9 @@ Player.prototype.onHit = function(weapon) {
 
 Player.prototype.update = function() {
 	
+	this.sword.x = this.x;
+	this.sword.y = this.y
+
 	// Don't allow any other inputs if you are being knocked back
 	if (this.hasBeenStabbed) {
 		switch (this.knockbackDirection) {
@@ -142,8 +147,6 @@ Player.prototype.update = function() {
 				this.sword.body.setSize(10,40, 6,20);
 				break;
 		}
-	} else {
-		this.sword.body.setSize(0,0,100000,10000);
 	}
 
 	if (this.isStabbing) {

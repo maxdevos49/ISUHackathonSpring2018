@@ -62,7 +62,7 @@ function socketSetup(){
 		for (var i = 0; i < otherPlayers.length; i++) {
 			if (data.id == otherPlayers[i].playerId) {
 				console.log("Removing player with id: " + data.id);
-				allSprites.splice(indexOf(otherPlayers[i]), 1);
+				allSprites.splice(allSprites.indexOf(otherPlayers[i]), 1);
 				otherPlayers[i].destroy();
 				otherPlayers.splice(i, 1);
 			}

@@ -69,9 +69,18 @@ function update() {
 	}
 
 	for (var i = 0; i < otherPlayers.length; i++) {
-		console.log(otherPlayers[i].sword);
-		if (Phaser.Rectangle.intersects(player, otherPlayers[i].sword)) {
-			player.onHit(otherPlayers[i].sword);
+		// console.log(otherPlayers[i].sword);
+		// var swordX = otherPlayers[i].sword.body.position.x;
+		// var swordY = otherPlayers[i].sword.body.position.y;
+		// var swordWidth = otherPlayers[i].sword.body.width;
+		// var swordHeight = otherPlayers[i].sword.body.height;
+		// if (checkOverlap(player, otherPlayers[i].sword)) {
+		// 	if (otherPlayers[i].isStabbing) {
+		// 		player.onHit(otherPlayers[i].sword);
+		// 	}
+		// }
+		if (otherPlayers[i].isStabbing) {
+			game.physics.arcade.collide(player, otherPlayers[i].sword, function(player, sword) {player.onHit(sword)});
 		}
 	}
 
@@ -91,3 +100,14 @@ function update() {
 	}
 
 }
+
+// function checkOverlap(spriteA, spriteB) {
+
+//     var boundsA = spriteA.getBounds();
+//     var boundsB = spriteB.getBounds();
+//     console.log(boundsA);
+//     console.log(boundsB);
+
+//     return Phaser.Rectangle.intersects(boundsA, boundsB);
+
+// }

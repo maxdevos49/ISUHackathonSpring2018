@@ -44,25 +44,24 @@ app.get('/index.html', (req, res) => {
 //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/Socket IO CODE\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
 //init variables
-var user = [];
+var userData = [];
 var num_Id = [];
-var rmIndex;
-var client = 0;
+var nextClientNum = 0;
 
 //process socket request
 io.on("connection", function(socket){//this runs on first connection
 
   //give client a socket id
-  num_Id[client] = socket.id;
+  num_Id[nextClientNum] = socket.id;
 
   //create a object of the user info
-  //user[client] = new userInfo(socket.id, client);
+  //user[client] = new userInfo(socket.id, nextClientNum);
 
   //alert the console of a new user
-  console.log("new connection with index: " + client);
+  console.log("new connection with index: " + nextClientNum);
 
   //reply for initial connection
-  socket.emit("connReply", client);
+  socket.emit("connReply", user[nextClientNum]);
 
 
   //this is recieved from a newly connected client
@@ -75,9 +74,12 @@ io.on("connection", function(socket){//this runs on first connection
 
   });
 
+  socket.on
+
   //run this when someone disconnects
   socket.on("disconnect", function(){
 
+    var rmIndex;
     //loop through all the user objects
     for (var i = 0; i < num_Id.length ;i++ ){
 
@@ -85,7 +87,7 @@ io.on("connection", function(socket){//this runs on first connection
       if (num_Id[i] == socket.id){
 
         //save the disconnecting users index
-        rmIndex = i;
+        var rmIndex = i;
       }
     }
 
@@ -101,5 +103,5 @@ io.on("connection", function(socket){//this runs on first connection
   });
 
   //increment this once per connection for client index/clientNum
-  client++;
+  nextClientNum++;
 });

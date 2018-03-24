@@ -1,5 +1,5 @@
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
-	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
+	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-ally'));
 
 	this.scale.setTo(1.5, 1.5)
 
@@ -14,23 +14,55 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 		"sprint":6,
 		"crawl":2
 	}
+
+	this.isStabbing = false;
+	this.isInCooldown = false;
+	this.stabTimer = 0;
+	this.cooldownTimer = 0;
+	this.stabCooldown = 30;
+	this.stabDuration = 25;
+
 	game.add.existing(this);
 
-	this.animations.add('stand',[0], 0, true);
-	this.animations.add('walkDown',[0,1], 0, true);
-	this.animations.add('walkUp',[2,3], 0, true);
-	this.animations.add('walkLeft',[6,7], 0, true);
-	this.animations.add('walkRight',[4,5], 0, true);
-
+	this.animations.add('walkDown',['down1', 'down2'], 0, true);
+	this.animations.add('walkUp', ['up1', 'up2'], 0, true);
+	this.animations.add('walkLeft', ['left1', 'left2'], 0, true);
+	this.animations.add('walkRight', ['right1', 'right2'], 0, true);
+	this.animations.add('stabUp', ['up1', 'stabUp', 'up1', 'stabUp', 'up1'], 0, true);
+	this.animations.add('stabDown', ['down1', 'stabDown', 'down1', 'stabkdown'], 'down1', 0, true);
+	this.animations.add('stabRight', ['right1', 'stabRight', 'right1', 'stabRight'], 'right1', 0, true);
+	this.animations.add('stabLeft', ['left1', 'stabLeft', 'left1', 'stabLeft', 'left1'], 0, true);
 
 }
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
+Player.prototype.stab = function() {
+	if (!this.isInCooldown && !this.isStabbing) {
+		console.log("Stabbing!");
+		this.isStabbing = true;
+	}
+}
+
 Player.prototype.update = function() {
 	
-	if (this.moving) {
+	if (this.isStabbing) {
+		this.stabTimer++;
+		if (this.stabTimer >= this.stabDuration) {
+			this.stabTimer = 0;
+			this.isStabbing = false;
+			this.isInCooldown = true;
+		}
+	} else if (this.isInCooldown) {
+		this.cooldownTimer++;
+		if (this.cooldownTimer >= this.stabCooldown) {
+			this.cooldownTimer = 0;
+			this.isInCooldown = false;
+		}
+	}
+
+	if (this.moving && !this.isStabbing) {
 		switch (this.direction) {
 			case "left":
 				this.x -= this.movementSpeeds[this.curMoveSpeed];
@@ -52,25 +84,46 @@ Player.prototype.update = function() {
 	} else {
 		switch (this.direction) {
 			case "left":
-			this.animations.play('walkLeft', 100, false);
-			this.animations.stop(null, true);
-			this.animations.frame = 6;
-			break;
+				if (this.isStabbing) {
+					console.log("Playing animation");
+					this.animations.play("stabLeft", 12, false);
+					this.stabbingAnimationStarted = true;
+				} else {
+					this.animations.play('walkLeft', 100, false);
+					this.animations.stop(null, true);
+					this.animations.frame = 6;
+				}
+				break;
 			case "right":
-			this.animations.play('walkRight', 100, false);
-			this.animations.stop(null, true);
-			this.animations.frame = 4;
-			break;
+				if (this.isStabbing) {
+					this.animations.play("stabRight", 12, false);
+					this.stabbingAnimationStarted = true;
+				} else {
+					this.animations.play('walkRight', 100, false);
+					this.animations.stop(null, true);
+					this.animations.frame = 4;
+				}
+				break;
 			case "up":
-			this.animations.play('walkUp', 100, false);
-			this.animations.stop(null, true);
-			this.animations.frame = 2;
-			break;
+				if (this.isStabbing) {
+					this.animations.play("stabUp", 12, false);
+					this.stabbingAnimationStarted = true;
+				} else {
+					this.animations.play('walkUp', 100, false);
+					this.animations.stop(null, true);
+					this.animations.frame = 2;
+				}
+				break;
 			case "down":
-			this.animations.play('walkDown', 100, false);
-			this.animations.stop(null, true);
-			this.animations.frame = 0;
-			break;
+				if (this.isStabbing) {
+					this.animations.play("stabDown", 12, false);
+					this.stabbingAnimationStarted = true;
+				} else {
+					this.animations.play('walkDown', 100, false);
+					this.animations.stop(null, true);
+					this.animations.frame = 0;
+				}
+				break;
 		}
 	}
 }

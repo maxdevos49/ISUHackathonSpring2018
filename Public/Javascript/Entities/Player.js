@@ -21,6 +21,6 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-	this.x = Math_cos(this.angle) * this.movementSpeeds[curMoveSpeed];
-	this.y = Math_sin(this.angle) * this.movementSpeeds[curMoveSpeed];
+	this.x = Math.cos(this.angle) * this.movementSpeeds[this.curMoveSpeed];
+	this.y = Math.sin(this.angle) * this.movementSpeeds[this.curMoveSpeed];
 }

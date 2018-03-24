@@ -1,0 +1,29 @@
+{
+  "name": "isuhackathonspring2018",
+  "version": "1.0.0",
+  "description": "TopDown Multiplayer fighter game thing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxdevos49/ISUHackathonSpring2018.git"
+  },
+  "author": "Maxwell DeVos, Mason Timmerman, Thomas Powell, Joseph Naberhaus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxdevos49/ISUHackathonSpring2018/issues"
+  },
+  "homepage": "https://github.com/maxdevos49/ISUHackathonSpring2018#readme",
+  "devDependencies": {
+    "socket.io": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "jsonfile": "^4.0.0",
+    "nodemon": "^1.17.2",
+    "phaser": "^3.3.0"
+  }
+}

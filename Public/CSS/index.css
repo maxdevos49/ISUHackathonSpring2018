@@ -10,14 +10,24 @@ header {
     font-variant: small-caps;
 }
 
+#title {
+    margin: 0px;
+    padding: 0px;
+
+    line-height: 125px;
+    height: 125px;
+}
+
 .heading {
+    background: radial-gradient(ghostwhite, dimgray);
+
     text-align: center;
     font-weight: bold;
     font-size: 22px;
 }
 
 nav {
-    background-color: dodgerblue;
+    background-color: forestgreen;
 
     display: flex;
     flex-direction: row;
@@ -41,6 +51,7 @@ a {
 .navElement:hover {
     background-color: lightgray;
 }
+
 
 #signIn {
     margin: 15px;
@@ -66,11 +77,10 @@ a {
     font-size: 18px;
     font-variant: small-caps;
 
-    background-color: dodgerblue;
+    background-color: forestgreen;
     border: none;
 }
 
 canvas {
     margin: 20px auto 10px auto;
-
 }

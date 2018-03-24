@@ -7,7 +7,8 @@ var walkDown;
 var walkUp;
 var walkLeft;
 var walkRight;
-var cursors;
+var cursorKeys;
+var spaceKey;
 var map;
 var layer;
 var controller1;
@@ -56,7 +57,8 @@ function create() {
 
 	//game.physics.startSystem(Phaser.Physics.BOX2D);
 
-	cursors = game.input.keyboard.createCursorKeys();
+	cursorKeys = game.input.keyboard.createCursorKeys();
+	spaceKey = game.input.keyboard.addKey(Phaser.keyboard.SPACEBAR);
 
 	game.input.gamepad.start();
 

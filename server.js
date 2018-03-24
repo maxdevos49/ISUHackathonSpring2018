@@ -101,7 +101,7 @@ io.on("connection", function(socket){//this runs on first connection
   });
 
   socket.on("serverRecievePlayerData", function(data) {
-    userData[data.clientData] = data;
+    userData[data.clientId] = data;
     sockets.emit("clientRecievePlayerData", data);
   });
 

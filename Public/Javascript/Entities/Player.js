@@ -52,8 +52,8 @@ Player.prototype.getData = function() {
 		"playerName" : this.playerName,
 		"playerId" : this.playerId,
 		"direction" : this.direction,
-		"moving" : moving,
-		"curMoveSpeed" : curMoveSpeed
+		"moving" : this.moving,
+		"curMoveSpeed" : this.curMoveSpeed
 	}
 }
 

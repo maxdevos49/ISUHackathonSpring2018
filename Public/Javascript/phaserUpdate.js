@@ -12,6 +12,10 @@ function update() {
 		player.moving = true;
 	}
 
-	
+	var clientData = {
+		"clientId" : userId,
+		"player" : player.getData()
+	}
+	socket.emit("serverRecievePlayerData", clientData);
 
 }

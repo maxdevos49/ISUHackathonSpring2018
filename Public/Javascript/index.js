@@ -74,6 +74,8 @@ function socketSetup(){
 
 	});
 
-
+	socket.on("serverRecievePlayerData", function(data) {
+		
+	})
 
 }

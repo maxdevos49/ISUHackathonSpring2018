@@ -44,6 +44,7 @@ function create() {
 
     layer.resizeWorld();
 
+    map.setCollisionBetween(54, 83);
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 

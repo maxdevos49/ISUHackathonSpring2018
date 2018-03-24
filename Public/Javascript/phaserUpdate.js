@@ -15,11 +15,11 @@ function update() {
 		direction = "right";
 	}
 
-	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
+	if ((pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) && (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > -0.5) && (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < 0.5)) {
 		direction = "up";
 	}
 
-	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1) {
+	if ((pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)  && (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > -0.5) && (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < 0.5)) {
 		direction = "down";
 	}
 

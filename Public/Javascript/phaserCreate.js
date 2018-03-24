@@ -11,8 +11,8 @@ var cursorKeys;
 var spaceKeyStroke;
 var map;
 var layer;
-var controller1;
-var controllerConnected;
+// var pad1;
+// var controllerConnected;
 
 function create() {
 	"use strict";
@@ -60,16 +60,16 @@ function create() {
 	cursorKeys = game.input.keyboard.createCursorKeys();
 	spaceKeyStroke = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-	game.input.gamepad.start();
-    controller1 = game.input.gamepad.pad1;
-	game.input.onDown.add(dump, this);
+	// game.input.gamepad.start();
+    // pad1 = game.input.gamepad.pad1;
+	// game.input.onDown.add(dump, this);
 
 	//Checks if controller is supported, active, and connected
-	if (game.input.gamepad.supported && game.input.gamepad.active && controller1.connected) {
-		controllerConnected = true;
-	} else {
-		controllerConnected = false;
-	}
+	// if (game.input.gamepad.supported && game.input.gamepad.active) {
+	// 	controllerConnected = true;
+	// } else {
+	// 	controllerConnected = false;
+	// }
 
 
 	joinGame();
@@ -77,9 +77,9 @@ function create() {
 }
 
 
-function dump() {
-
-    console.log(pad1._axes[0]);
-    console.log(pad1._rawPad.axes[0]);
-
-}
+// function dump() {
+//
+//     console.log(pad1._axes[0]);
+//     console.log(pad1._rawPad.axes[0]);
+//
+// }

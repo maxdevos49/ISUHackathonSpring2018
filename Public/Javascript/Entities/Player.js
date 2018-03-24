@@ -1,8 +1,9 @@
-Player = function(game, playerName, playerId, initialX, initialY) {
-	Phaser.Sprite.call(this, game, initialX, initialY, 'player');
+Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
+	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
 
 	this.scale.setTo(1.5, 1.5)
 
+	this.isAlly = isAlly;
 	this.playerName = playerName;
 	this.playerId = playerId;
 	this.direction = "up";
@@ -13,7 +14,6 @@ Player = function(game, playerName, playerId, initialX, initialY) {
 		"sprint":6,
 		"crawl":2
 	}
-	this.hasChanged = false;
 	game.add.existing(this);
 
 	this.animations.add('stand',[0], 0, true);

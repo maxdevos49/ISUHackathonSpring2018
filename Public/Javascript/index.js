@@ -32,16 +32,13 @@ function socketSetup(){
 	});
 
 	socket.on("idAssign", function(data) {
-		console.log("Assigned id: "+ data.id);
 		id = data.id;
 		gameSetup();
 	});
 
 	socket.on("addUsers", function(userDatas) {
 		console.log("Adding users");
-		console.log(userDatas);
 		for (var i = 0; i < userDatas.length; i++) {
-			console.log("Should i add? " + userDatas[i].player.playerId);
 			if (userDatas[i].player.playerId !== id) {
 				console.log(userDatas[i]);
 				addUser(userDatas[i]);
@@ -68,69 +65,6 @@ function socketSetup(){
 		}
 	});
 
-	// socket.on("connReply", function(data){
-	// 	userId = data;
-	// 	gameSetup();
-	// });
-
-
-	// //load new users when they connect
-	// socket.on("addUser", function(data){
-
-	// 	connectedCount +=1;
-
-	// 	// Unpack data
-	// 	if (data.player.playerId !== userId) {
-	// 		addUser(data);
-	// 	}
-
-	// 	console.log("A user connected!");
-	// 	console.log("There are " + connectedCount + " user online!");
-	// });
-
-	// //remove users when they disconnect
-	// socket.on("userDisconnect", function(data) {
-		
-	// 	//delete the user here/tell server to save his info
-	// 	connectedCount -= 1;
-
-	// 	for (var i = 0; i < otherPlayers.length; i++) {
-	// 		if (otherPlayers[i].playerId === data.id) {
-	// 			console.log("Removing " + i);
-	// 			otherPlayers.split(i,1);
-	// 		}
-	// 	}
-
-	// 	console.log("There are " + connectedCount + " user online!");
-
-	// });
-
-	// socket.on("recieveUsers", function(users) {
-	// 	for (let user of users) {
-	// 		if (user !== null) {
-	// 			addUser(user);
-	// 		}
-	// 	}
-	// });
-
-	// socket.on("clientRecievePlayerData", function(data) {
-
-	// 	if(data.clientId !== userId){
-	// 		for (let otherPlayer of otherPlayers) {
-	// 			if (otherPlayer.playerId == data.player.playerId) {
-	// 				otherPlayer.unpackData(data);
-	// 			}
-	// 		}
-	// 	}
-		
-	// });
-
-	// socket.on("disconnect", function(){
-
-	// 	console.log("connection Lost... reload your page");
-
-	// });
-
 }
 
 function joinGame() {
@@ -141,7 +75,7 @@ function joinGame() {
 
 function addUser(userData) {
 	console.log("Adding player with id: " + userData.player.playerId);
-	var newPlayer = new Player(game, userData.player.playerName, userData.player.playerId, userData.player.x, userData.player.y);
+	var newPlayer = new Player(game, false, userData.player.playerName, userData.player.playerId, userData.player.x, userData.player.y);
 	newPlayer.unpackData(userData.player);
 	otherPlayers.push(newPlayer);
 }

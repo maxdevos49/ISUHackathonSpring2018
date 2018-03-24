@@ -2,7 +2,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
 	game.physics.enable([this], Phaser.Physics.ARCADE);
 
-	this.scale.setTo(1.5, 1.5);
+	this.scale.setTo(2, 2);
 	this.anchor.setTo(.5,.5);
 
 	this.isAlly = isAlly;

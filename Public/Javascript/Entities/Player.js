@@ -1,5 +1,6 @@
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
-	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-ally'));
+	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
+	game.physics.enable([this], Phaser.Physics.ARCADE);
 
 	this.scale.setTo(1.5, 1.5);
 	this.anchor.setTo(.5,.5);
@@ -11,10 +12,12 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.moving = false;
 	this.curMoveSpeed = "normal";
 	this.movementSpeeds = {
-		"normal":4,
-		"sprint":6,
+		"normal":200,
+		"sprint":17,
 		"crawl":2
 	}
+
+	this.health = 100;
 
 	this.isStabbing = false;
 	this.isInCooldown = false;
@@ -62,26 +65,36 @@ Player.prototype.update = function() {
 		}
 	}
 
+	if (!this.moving) {
+
+	}
+
 	if (this.moving && !this.isStabbing) {
 		switch (this.direction) {
 			case "left":
-				this.x -= this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.x = -this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.y = 0;
 				this.animations.play('walkLeft',8, false);
 				break;
 			case "right":
-				this.x += this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.x = this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.y = 0;
 				this.animations.play('walkRight',8, false);
 				break;
 			case "up":
-				this.y -= this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.y = -this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.x = 0;
 				this.animations.play('walkUp',8, false);
 				break;
 			case "down":
-				this.y += this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.y = this.movementSpeeds[this.curMoveSpeed];
+				this.body.velocity.x = 0;
 				this.animations.play('walkDown',8, false);
 				break;
 		} 
 	} else {
+		this.body.velocity.x = 0;
+		this.body.velocity.y = 0;
 		switch (this.direction) {
 			case "left":
 				if (this.isStabbing) {
@@ -135,7 +148,9 @@ Player.prototype.getData = function() {
 		"playerId" : this.playerId,
 		"direction" : this.direction,
 		"moving" : this.moving,
-		"curMoveSpeed" : this.curMoveSpeed
+		"curMoveSpeed" : this.curMoveSpeed,
+		"isStabbing" : this.isStabbing,
+		"health" : this.health
 	}
 }
 
@@ -147,4 +162,6 @@ Player.prototype.unpackData = function(data) {
 	this.direction = data.direction;
 	this.moving = data.moving;
 	this.curMoveSpeed = data.curMoveSpeed;
+	this.isStabbing = data.isStabbing;
+	this.health = data.health;
 }

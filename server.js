@@ -69,6 +69,9 @@ io.on("connection", function(socket){//this runs on first connection
     for (var key in Object.keys(users)) {
       console.log(key); 
       console.log("giving new client user data for user: " + users[key].data.id);
+      if (users[key] == null) {
+        continue;  
+      }
       userDatas.push(users[key].data);
     }
     socket.emit("addUsers", userDatas);
@@ -88,11 +91,11 @@ io.on("connection", function(socket){//this runs on first connection
       console.log(id);
       if (users[id].socketId == socket.id) {
         io.sockets.emit("removeUser", {"id" : id})
-        break;
       } else {
         remainingUsers[id] = users[id];
       }
     }
     users = remainingUsers;
+    console.log(remainingUsers);
   });
 });

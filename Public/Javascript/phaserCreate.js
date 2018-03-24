@@ -9,11 +9,15 @@ var walkLeft;
 var walkRight;
 var cursorKeys;
 var spaceKeyStroke;
+var wKey;
+var aKey;
+var sKey;
+var dKey;
 var map;
 var layer;
 var allSprites = [];
 var pad1;
-// var controllerConnected;
+
 
 function create() {
 	"use strict";
@@ -62,6 +66,10 @@ function create() {
 
 	cursorKeys = game.input.keyboard.createCursorKeys();
 	spaceKeyStroke = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+	wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
+	aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+	sKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+	dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
 	game.input.gamepad.start();
     pad1 = game.input.gamepad.pad1;

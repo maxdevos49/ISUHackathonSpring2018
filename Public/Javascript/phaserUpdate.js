@@ -28,18 +28,18 @@ function update() {
 
 
 		//Arrow controls
-		if (cursorKeys.left.isDown) {
+		if (cursorKeys.left.isDown || aKey.isDown) {
 			direction = "left";
 		}
 
-		if (cursorKeys.right.isDown) {
+		if (cursorKeys.right.isDown || dKey.isDown) {
 			direction = "right";
 		}
-		if (cursorKeys.up.isDown) {
+		if (cursorKeys.up.isDown || wKey.isDown) {
 			direction = "up";
 		}
 
-		if (cursorKeys.down.isDown) {
+		if (cursorKeys.down.isDown || sKey.isDown) {
 			direction = "down";
 		}
 

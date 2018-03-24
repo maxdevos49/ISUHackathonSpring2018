@@ -1,15 +1,21 @@
 body {
     font-family: 'Cinzel Decorative', cursive;
+    background-color: gray;
+
     /* font-family: 'Montez', cursive;
     font-family: 'Bilbo Swash Caps', cursive;
     font-family: 'Condiment', cursive;
     font-family: 'Bilbo', cursive; */
 }
 
-h1 {
+/* .heading {
     display: flex;
-
     align-content: center;
+} */
+
+header {
+    font-variant: small-caps;
+    font-weight: bold;
 }
 
 nav {
@@ -19,14 +25,16 @@ nav {
     justify-content: flex-start;
     align-items: center;
 
-    height: 40px;
-
-    font-variant: small-caps;
-    font-weight: bold;
-
     background-color: dodgerblue;
 }
 
 .navElement {
-    font-size: 25px;
+    margin: 5px;
+    padding: 5px;
+
+    font-size: 22px;
+}
+
+.navElement:hover {
+    background-color: lightgray;
 }

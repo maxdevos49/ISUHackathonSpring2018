@@ -17,7 +17,7 @@ const ip = require('ip');
 server.listen(8080);
 
 //tell console the server is running
-console.log(`Paint Server Started!! IP is ${ip.address()}:8080`);
+console.log(`Hackathon 2! IP is ${ip.address()}:8080`);
 
 //tell where to find page depended info. css/javascript/images/audio/and other stuff
 app.use(express.static('Public'));
@@ -103,11 +103,3 @@ io.on("connection", function(socket){//this runs on first connection
   //increment this once per connection for client index/clientNum
   client++;
 });
-
-//user object constructor
-// function userInfo(clientID,clientNum,userName){
-//   jshint validthis:true 
-//   this.clientID = clientID;
-//   this.clientNum = clientNum;
-//   this.clientUserName = userName;
-// }

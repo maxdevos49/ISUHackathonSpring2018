@@ -1,47 +1,39 @@
-//linter settings
-/*global console:false, global Phaser:false*/
-//jshint unused:false
+Player = function(game, initialX, initialY) {
+	Phaser.Sprite.call(this, game, initialX, initialY, 'player');
 
-class Player {
-	constructor(game, initialX, initialY) {
-		Phaser.Sprite.call(this, game, initialX, initialY);
-
-		this.anchor.setTo(0.5, 0.5);
-
-		this.angle = 0;
-		this.moving = false;
-		this.curMoveSpeed = "normal";
-		this.movementSpeeds = {
-			"normal":10,
-			"sprint":15,
-			"crawl":7
-		}
-
-		game.add.existing(this);
-		this.prototype = Object.create(Phaser.Sprite.prototype);
+	this.direction = "up";
+	this.moving = false;
+	this.curMoveSpeed = "normal";
+	this.movementSpeeds = {
+		"normal":10,
+		"sprint":15,
+		"crawl":7
 	}
+	game.add.existing(this);
 
-	update() {
-		this.x = Math.cos(this.angle) * this.movementSpeeds[this.curMoveSpeed];
-		this.y = Math.sin(this.angle) * this.movementSpeeds[this.curMoveSpeed];
+}
+
+Player.prototype = Object.create(Phaser.Sprite.prototype);
+Player.prototype.constructor = Player;
+
+Player.prototype.update = function() {
+	
+}
+
+Player.prototype.getData = function() {
+	return {
+		"x" : this.x,
+		"y" : this.y,
+		"direction" : this.direction,
+		"moving" : moving,
+		"curMoveSpeed" : curMoveSpeed
 	}
+}
 
-	getData() {
-		return {
-			"x" : this.x,
-			"y" : this.y,
-			"angle" : this.angle,
-			"moving" : moving,
-			"curMoveSpeed" : curMoveSpeed
-		}
-	}
-
-	unpackData(data) {
-		this.x = data.x;
-		this.y = data.y;
-		this.angle = data.angle;
-		this.moving = data.moving;
-		this.curMoveSpeed = data.curMoveSpeed;
-	}
-
+Player.prototype.unpackData = function(data) {
+	this.x = data.x;
+	this.y = data.y;
+	this.direction = data.direction;
+	this.moving = data.moving;
+	this.curMoveSpeed = data.curMoveSpeed;
 }

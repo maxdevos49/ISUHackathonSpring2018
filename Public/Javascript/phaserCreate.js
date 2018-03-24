@@ -1,8 +1,10 @@
+//jshint unused:false
+/*global Player:false*/
 var player;
 
 function create() {
-
-	player = new Player(game, 100, 100);
+	"use strict";
+	player = new Player(game, 0, 0);
 	cursors = game.input.keyboard.createCursorKeys();
 
 }

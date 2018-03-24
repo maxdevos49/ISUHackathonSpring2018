@@ -22,14 +22,14 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-	switch (this.direction) {
-		// Do we need to update other clients
-		if (moving == true) {
-			this.hasChanged = true;
-		} else {
-			this.hasChanged = false;
-		}
+	// Do we need to update other clients
+	if (moving == true) {
+		this.hasChanged = true;
+	} else {
+		this.hasChanged = false;
+	}
 
+	switch (this.direction) {
 		case "left":
 			this.x -= this.movementSpeeds[this.curMoveSpeed];
 			break;

@@ -12,4 +12,6 @@ function update() {
 		player.moving = true;
 	}
 
+	
+
 }

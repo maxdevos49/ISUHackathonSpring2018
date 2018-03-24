@@ -63,4 +63,7 @@ function update() {
 	};
 	socket.emit("userDataUpdate", clientData);
 
+	// Adjust levels of sprites
+	game.world.bringToTop(player);
+
 }

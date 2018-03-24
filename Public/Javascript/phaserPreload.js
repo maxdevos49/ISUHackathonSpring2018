@@ -6,5 +6,5 @@ function preload() {
 
 	game.load.spritesheet('player-ally', 'Images/WalkingSpriteSheet.png', 31, 37, 8);
 	game.load.spritesheet('player-enemy', 'Images/WalkingSpriteSheetP2.png', 31, 37, 8);
-
+	game.load.image('tiles', 'Images/tiletest.png');
 }

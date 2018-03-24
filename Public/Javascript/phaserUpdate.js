@@ -6,52 +6,59 @@ function update() {
 	// Controls for player
 	var direction = "NONE";
 
+	//Controller controls
+	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
+		direction = "left";
+	}
 
-		//Controller controls
-		if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
-			direction = "left";
-		}
-		else if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) {
-			direction = "right";
-		}
+	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) {
+		direction = "right";
+	}
 
-		if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
-			direction = "up";
-		}
-		else if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1) {
-			direction = "down";
-		}
+	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
+		direction = "up";
+	}
 
-		if (pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
-			player.stab();
-		}
+	if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1) {
+		direction = "down";
+	}
+
+	if (pad1.isDown(Phaser.Gamepad.XBOX360_LEFT_TRIGGER)) {
+		player.currMoveSpeed = "sprint";
+	} else {
+		player.currMoveSpeed = "normal";
+	}
+
+	if (pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
+		player.stab();
+	}
 
 
-		//Arrow controls
-		if (cursorKeys.left.isDown || aKey.isDown) {
-			direction = "left";
-		}
+	//Arrow and WASD controls
+	if (cursorKeys.left.isDown || aKey.isDown) {
+		direction = "left";
+	}
 
-		if (cursorKeys.right.isDown || dKey.isDown) {
-			direction = "right";
-		}
-		if (cursorKeys.up.isDown || wKey.isDown) {
-			direction = "up";
-		}
+	if (cursorKeys.right.isDown || dKey.isDown) {
+		direction = "right";
+	}
+	if (cursorKeys.up.isDown || wKey.isDown) {
+		direction = "up";
+	}
 
-		if (cursorKeys.down.isDown || sKey.isDown) {
-			direction = "down";
-		}
+	if (cursorKeys.down.isDown || sKey.isDown) {
+		direction = "down";
+	}
 
-		if (shiftKey.isDown) {
-			player.currMoveSpeed = "sprint";
-		} else {
-			player.currMoveSpeed = "normal";
-		}
+	if (shiftKey.isDown) {
+		player.currMoveSpeed = "sprint";
+	} else {
+		player.currMoveSpeed = "normal";
+	}
 
-		if (spaceKeyStroke.isDown) {
-			player.stab();
-		}
+	if (spaceKeyStroke.isDown) {
+		player.stab();
+	}
 
 
 	if (direction == "NONE") {

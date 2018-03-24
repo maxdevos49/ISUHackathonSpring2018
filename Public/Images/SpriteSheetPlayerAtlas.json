@@ -1,0 +1,21 @@
+{
+   "filename":"SpriteSheetPlayer",
+   "frame":{ 
+      "x":954,
+      "y":256,
+      "w":230,
+      "h":296
+   },
+   "rotated":false,
+   "trimmed":false,
+   "spriteSourceSize":{ 
+      "x":0,
+      "y":0,
+      "w":230,
+      "h":296
+   },
+   "sourceSize":{ 
+      "w":230,
+      "h":296
+   }
+}

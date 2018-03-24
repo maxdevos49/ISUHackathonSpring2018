@@ -58,7 +58,7 @@ function create() {
 	//game.physics.startSystem(Phaser.Physics.BOX2D);
 
 	cursorKeys = game.input.keyboard.createCursorKeys();
-	spaceKey = game.input.keyboard.addKey(Phaser.keyboard.SPACEBAR);
+	spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 	game.input.gamepad.start();
 

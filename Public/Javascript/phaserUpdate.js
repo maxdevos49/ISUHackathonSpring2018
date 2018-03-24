@@ -52,7 +52,7 @@ function update() {
 			direction = "down";
 		}
 
-		if (spaceKey.isDown) {
+		if (spaceKeyStroke.isDown) {
 			player.stab();
 		}
 	}

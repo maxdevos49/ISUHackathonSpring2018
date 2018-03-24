@@ -18,6 +18,8 @@ var map;
 var layer;
 var allSprites = [];
 var pad1;
+var bmpText;
+// var controllerConnected;
 
 
 function create() {
@@ -58,6 +60,10 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	player = new Player(game, true, myUsername, id, 400, 300);
+	bmpText = game.add.bitmapText(0, -25, 'carrier_command',myUsername,5);
+	bmpText.anchor.x = 0.5;
+	player.addChild(bmpText);
+
 	allSprites.push(player);
 	game.physics.enable([player], Phaser.Physics.ARCADE);
 	game.camera.follow(player);
@@ -87,3 +93,4 @@ function create() {
 	joinGame();
 
 }
+

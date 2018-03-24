@@ -17,6 +17,10 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 		"sprint":260
 	}
 
+	bmpText = game.add.bitmapText(0, -25, 'carrier_command', playerName ,5);
+ 	bmpText.anchor.x = 0.5;
+ 	this..addChild(bmpText);
+
 	this.health = 100;
 	this.stamina = 100;
 	this.requiredStaminaToStartRunning = 20;
@@ -72,11 +76,22 @@ Player.prototype.setPace = function(sprint) {
 	}
 }
 
-Player.prototype.onHit = function(weapon) {
+player.prototype.isDead = function() {
+	return health <= 0;
+}
+
+Player.prototype.onHit = function(weapon, attackerId) {
 	console.log("Ouch");
 	if (!this.hasBeenStabbed) {
 	
 		this.health -= weapon.damage;
+
+		if (this.isDead()) {
+			// Give player points!
+			playerDeath();
+
+		}
+
 		this.hasBeenStabbed = true;
 		this.knockbackForce = weapon.knockbackForce;
 

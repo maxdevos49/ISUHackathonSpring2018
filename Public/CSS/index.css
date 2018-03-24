@@ -1,0 +1,28 @@
+body {
+
+}
+
+h1 {
+    display: flex;
+
+    align-content: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 40px;
+
+    font-variant: small-caps;
+    font-weight: bold;
+
+    background-color: dodgerblue;
+}
+
+.navElement {
+    font-size: 25px;
+}

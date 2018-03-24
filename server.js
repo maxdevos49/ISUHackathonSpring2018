@@ -90,7 +90,7 @@ io.on("connection", function(socket){//this runs on first connection
     }
 
     //remove the disconnecting users object
-    delete user[rmIndex];
+    //delete user[rmIndex];
     console.log("Disconnection with index: " + rmIndex);
 
     //alert other clients of the disconnect

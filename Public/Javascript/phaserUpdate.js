@@ -6,7 +6,6 @@ function update() {
 	// Controls for player
 	var direction = "NONE";
 
-	if (controllerConnected) {
 
 		//Controller controls
 		if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
@@ -27,7 +26,6 @@ function update() {
 			player.stab();
 		}
 
-	} else {
 
 		//Arrow controls
 		if (cursorKeys.left.isDown) {
@@ -48,7 +46,6 @@ function update() {
 		if (spaceKeyStroke.isDown) {
 			player.stab();
 		}
-	}
 
 
 	if (direction == "NONE") {

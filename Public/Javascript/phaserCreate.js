@@ -12,7 +12,7 @@ var spaceKeyStroke;
 var map;
 var layer;
 var pad1;
-var controllerConnected;
+// var controllerConnected;
 
 function create() {
 	"use strict";
@@ -65,11 +65,11 @@ function create() {
     pad1 = game.input.gamepad.pad1;
 
 	//Checks if controller is supported, active, and connected
-	if (game.input.gamepad.supported && game.input.gamepad.active) {
-		controllerConnected = true;
-	} else {
-		controllerConnected = false;
-	}
+	// if (game.input.gamepad.supported && game.input.gamepad.active && game.input.gamepad.pad1.connected) {
+	// 	controllerConnected = true;
+	// } else {
+	// 	controllerConnected = false;
+	// }
 
 
 	joinGame();

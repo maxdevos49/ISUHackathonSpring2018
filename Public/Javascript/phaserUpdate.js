@@ -80,7 +80,7 @@ function update() {
 		// 	}
 		// }
 		if (otherPlayers[i].isStabbing) {
-			game.physics.arcade.collide(player, otherPlayers[i].sword, function(player, sword) {player.onHit(sword)});
+			game.physics.arcade.collide(player, otherPlayers[i].sword, function(player, sword) {player.onHit(sword, otherPlayers[i].playerId)});
 		}
 	}
 
@@ -111,3 +111,10 @@ function update() {
 //     return Phaser.Rectangle.intersects(boundsA, boundsB);
 
 // }
+
+function playerDeath() {
+
+	var newGrave = game.add.sprite(player.x, player.y, 'grave');
+	graves.push(newGrave);
+
+}

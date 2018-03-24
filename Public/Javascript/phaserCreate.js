@@ -61,10 +61,10 @@ function create() {
 	spaceKeyStroke = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 	game.input.gamepad.start();
+    controller1 = game.input.gamepad.pad1;
+	game.input.onDown.add(dump, this);
 
-	// To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.gamepadX, where X = gamepad 1-4
-    controller1 = game.input.gamepad.controller1;
-
+	//Checks if controller is supported, active, and connected
 	if (game.input.gamepad.supported && game.input.gamepad.active && controller1.connected) {
 		controllerConnected = true;
 	} else {
@@ -73,5 +73,13 @@ function create() {
 
 
 	joinGame();
+
+}
+
+
+function dump() {
+
+    console.log(pad1._axes[0]);
+    console.log(pad1._rawPad.axes[0]);
 
 }

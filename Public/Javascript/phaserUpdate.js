@@ -18,7 +18,6 @@ function update() {
 	}
 
 
-	//Checks if controller is supported, active, and connected
 	if (controllerConnected) {
 
 		if (controller1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || controller1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {

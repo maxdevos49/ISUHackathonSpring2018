@@ -99,6 +99,9 @@ function update() {
 		game.world.bringToTop(allSpritesInCameraSorted[i]);
 	}
 
+	OnlineUsersTxt.text = "Players: " + connectedCount;
+	serverStatus.text = (connection === true) ? "Server Status: Green" : "Server Status: Red";
+
 }
 
 // function checkOverlap(spriteA, spriteB) {

@@ -8,6 +8,7 @@ var id;
 var myClient;
 var connectedCount = 1;
 var socket;
+var connection = false;
 
 var game;
 var cursors;
@@ -37,6 +38,7 @@ function socketSetup(){
 	socket.on("idAssign", function(data) {
 		id = data.id;
 		gameSetup();
+		connection = true;
 	});
 
 	socket.on("addUsers", function(userDatas) {
@@ -45,6 +47,7 @@ function socketSetup(){
 			if (userDatas[i].player.playerId !== id) {
 				console.log(userDatas[i]);
 				addUser(userDatas[i]);
+				connectedCount++;
 			}
 		}
 	});
@@ -65,9 +68,14 @@ function socketSetup(){
 				allSprites.splice(allSprites.indexOf(otherPlayers[i]), 1);
 				otherPlayers[i].destroy();
 				otherPlayers.splice(i, 1);
+				connectedCount--;
 			}
 		}
 	});
+
+	socket.on("disconnect", function(data) {
+		connection = false;
+	})
 
 }
 

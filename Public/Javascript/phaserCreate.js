@@ -121,8 +121,8 @@ function create() {
 	healthBar = game.add.bitmapText(0, 15, 'carrier_command',"Health: ", 10);
 	staminaBar = game.add.bitmapText(0, 30, 'carrier_command', "Stamina: ", 10);
 
-	serverStatus = game.add.bitmapText(600,0,'carrier_command', "serverStatus: ",10);
-	OnlineUsersTxt = game.add.bitmapText(600,15, 'carrier_command', "Players: " + connectedCount, 10);
+	serverStatus = game.add.bitmapText(550,0,'carrier_command', "serverStatus: ",10);
+	OnlineUsersTxt = game.add.bitmapText(550,15, 'carrier_command', "Players: " + connectedCount, 10);
 	hud.add(usernameTxtBox);
 	hud.add(healthBar);
 	hud.add(staminaBar);

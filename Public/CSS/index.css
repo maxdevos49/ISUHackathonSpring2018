@@ -13,7 +13,7 @@ header {
 .heading {
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 nav {
@@ -35,7 +35,7 @@ a {
     margin: 5px;
     padding: 5px;
 
-    font-size: 22px;
+    font-size: 24px;
 }
 
 .navElement:hover {
@@ -43,17 +43,29 @@ a {
 }
 
 #signIn {
+    margin: 15px;
+
     display: flex;
     flex-direction: row;
     align-content: center;
+    justify-content: center;
 }
 
-#usernameTextarea {
+#usernameInput {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 18px;
+    font-variant: small-caps;
+
     background-color: lightgray;
-    resize: none;
+
+    border: none;
 }
 
 #playButton {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 18px;
+    font-variant: small-caps;
+
     background-color: dodgerblue;
     border: none;
 }

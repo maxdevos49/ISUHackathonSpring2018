@@ -46,22 +46,22 @@ app.get('/index.html', (req, res) => {
 //init variables
 var userData = [];
 var num_Id = [];
-var nextClientNum = 0;
+var nextClientId = 0;
 
 //process socket request
 io.on("connection", function(socket){//this runs on first connection
 
   //give client a socket id
-  num_Id[nextClientNum] = socket.id;
+  num_Id[nextClientId] = socket.id;
 
   //create a object of the user info
-  //user[client] = new userInfo(socket.id, nextClientNum);
+  //user[client] = new userInfo(socket.id, nextClientId);
 
   //alert the console of a new user
-  console.log("new connection with index: " + nextClientNum);
+  console.log("new connection with index: " + nextClientId);
 
   //reply for initial connection
-  socket.emit("connReply", userData[nextClientNum]);
+  socket.emit("connReply", nextClientId);
 
 
   //this is recieved from a newly connected client
@@ -100,6 +100,11 @@ io.on("connection", function(socket){//this runs on first connection
 
   });
 
+  socket.on("serverRecievePlayerData", function(data) {
+    userData[data.clientData] = data;
+    sockets.emit("clientRecievePlayerData", data);
+  });
+
   //increment this once per connection for client index/clientNum
-  nextClientNum++;
+  nextClientId++;
 });

@@ -1,5 +1,5 @@
-Player = function(game, initialX, initialY) {
-	Phaser.Sprite.call(this, game, playerName, playerId, initialX, initialY, 'player');
+Player = function(game, playerName, playerId, initialX, initialY) {
+	Phaser.Sprite.call(this, game, initialX, initialY, 'player');
 
 	this.scale.setTo(1.5, 1.5)
 
@@ -23,7 +23,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
 	// Do we need to update other clients
-	if (moving == true) {
+	if (this.moving == true) {
 		this.hasChanged = true;
 	} else {
 		this.hasChanged = false;

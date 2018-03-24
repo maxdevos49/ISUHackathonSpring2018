@@ -5,6 +5,7 @@
 
 //init variables here
 var user = [];
+var userId;
 var myClient;
 var connectedCount = 0;
 var connection = false;
@@ -34,6 +35,7 @@ function socketSetup(){
 
 	socket.on("connReply", function(data){
 
+		userId = data;
 		//emit a request for all of the other users info
 		socket.emit("loadOtherUsers", user[myClient]);
 

@@ -2,6 +2,6 @@
 
 function preload() {
 	
-	game.load.spritesheet('player', 'Images/RoughMainSprite.png', 15, 15, 4);
+	game.load.spritesheet('player', 'Images/MainSpriteSheet.png', 31, 37, 8);
 
 }

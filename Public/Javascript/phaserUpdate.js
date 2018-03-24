@@ -6,6 +6,6 @@ function phaserUpdate() {
 	if (cursors.right.isDown) { xMovement += 1; }
 	if (cursors.up.isDown) { yMovement += 1; }
 	if (cursors.down.isDown) { yMovement -= 1; }
-	var movement_Angle = Math.atan2(movement_Y, movement_X) * (180 / Math.PI);
+	player.angle = Math.atan2(movement_Y, movement_X) * (180 / Math.PI);
 
 }

@@ -8,8 +8,6 @@ var userId;
 var myClient;
 var connectedCount = 0;
 var socket;
-var otherPlayers = [];
-
 
 var game;
 var cursors;
@@ -18,11 +16,9 @@ var cursors;
 function init(){
 	"use strict";
 
-	//call socket stuff for start
-	socketSetup();
-
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
+	
 }
 
 function socketSetup(){
@@ -36,7 +32,7 @@ function socketSetup(){
 
 		userId = data;
 		//emit a request for all of the other users info
-		socket.emit("loadOtherUsers",player);
+		socket.emit("addUser", player.getData());
 
 	});
 
@@ -47,6 +43,7 @@ function socketSetup(){
 		connectedCount +=1;
 
 		// Unpack data
+		addUser(data);
 
 		console.log("A user connected!");
 		console.log("There are " + connectedCount + " user online!");
@@ -73,10 +70,12 @@ function socketSetup(){
 
 	socket.on("clientRecievePlayerData", function(data) {
 
-
 		if(data.clientId !== userId){
-			player.unpackData(data);
-			console.log(data);
+			for (player in otherPlayers) {
+				if (player.playerId == data.player.playerId) {
+					player.unpackData(data.player);
+				}
+			}
 		}
 		
 

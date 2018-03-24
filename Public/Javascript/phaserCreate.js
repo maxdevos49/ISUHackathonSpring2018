@@ -20,7 +20,11 @@ function create() {
 	walkRight = player.animations.add('walkRight',[4,5], 0, true);
 	//player.animations.play('walk', [0],0, true);
 
+	//game.physics.startSystem(Phaser.Physics.BOX2D);
 
 	cursors = game.input.keyboard.createCursorKeys();
+
+	//call socket stuff for start
+	socketSetup();
 
 }

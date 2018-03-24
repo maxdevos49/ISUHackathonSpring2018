@@ -51,7 +51,7 @@ function update() {
 	}
 
 	if (shiftKey.isDown) {
-		player.currMoveSpeed = "sprint";
+		player.setPace(true);
 	} else {
 		player.setPace(false);
 	}

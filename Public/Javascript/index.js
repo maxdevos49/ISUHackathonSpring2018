@@ -49,7 +49,7 @@ function socketSetup(){
 	});
 
 	//remove users when they disconnect
-	socket.on("userDisconnect", function(data){
+	socket.on("userDisconnect", function(data) {
 		
 		//delete the user here/tell server to save his info
 
@@ -57,14 +57,34 @@ function socketSetup(){
 
 		connectedCount -= 1;
 
-		for (otherPlayer of otherPlayers) {
-			if (otherPlayer.playerId === data.id) {
-				otherPlayers.splice(indexOf(otherPlayer), 1);
+		for (var i = 0; i < otherPlayers.length; i++) {
+			if (otherPlayers[i].playerId == data.id) {
+				otherPlayers.splice(i, 1);
 			}
 		}
 
 		console.log("There are " + connectedCount + " user online!");
 
+	});
+
+	socket.on("recieveUsers", function(users) {
+		for (let user of users) {
+			if (user != null) {
+				addUser(user);
+			}
+		}
+	});
+
+	socket.on("clientRecievePlayerData", function(data) {
+
+		if(data.clientId !== userId){
+			for (let otherPlayer of otherPlayers) {
+				if (otherPlayer.playerId == data.player.playerId) {
+					otherPlayer.unpackData(data);
+				}
+			}
+		}
+		
 	});
 
 	socket.on("disconnect", function(){
@@ -73,28 +93,16 @@ function socketSetup(){
 
 	});
 
-	socket.on("clientRecievePlayerData", function(data) {
-
-		if(data.clientId !== userId){
-			for (otherPlayer of otherPlayers) {
-				if (otherPlayer.playerId == data.player.playerId) {
-					otherPlayer.unpackData(data.player);
-				}
-			}
-		}
-		
-
-	});
-
 }
 
 function joinGame() {
 	// Add self to game
-	socket.emit("addUser", player.getData());
+	socket.emit("getUsers");
+	socket.emit("addUser", {"player" : player.getData()});
 }
 
-function addUser(playerData) {
-	var newPlayer = new Player(game, playerData.playerName, playerData.playerId, playerData.x, playerData.y);
-	newPlayer.unpackData(playerData);
+function addUser(userData) {
+	var newPlayer = new Player(game, userData.player.playerName, userData.player.playerId, userData.player.x, userData.player.y);
+	newPlayer.unpackData(userData.player);
 	otherPlayers.push(newPlayer);
 }

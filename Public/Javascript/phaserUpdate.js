@@ -27,20 +27,13 @@ function update() {
 
 		player.moving = false;
 
-	} else {
+	} 
 
-		player.moving = true;
-		var clientData = {
-			"clientId" : userId,
-			"player" : player.getData()
-		};
-		socket.emit("serverRecievePlayerData", clientData);
-	}
-
-	
-
-
-
-
+	player.moving = true;
+	var clientData = {
+		"clientId" : userId,
+		"player" : player.getData()
+	};
+	socket.emit("serverRecievePlayerData", clientData)
 
 }

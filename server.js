@@ -67,12 +67,14 @@ io.on("connection", function(socket){//this runs on first connection
   //this is recieved from a newly connected client
   socket.on("addUser", function(data){
 
-    //user[data.clientNum].clientUserName = data.clientUserName;
-
     //this is sent after a new client is connected and tells all the other clients to add there info
     io.sockets.emit("addUser", data);
 
   });
+
+  socket.on("getUsers", function() {
+    socket.emit("recieveUsers", userData);
+  }); 
 
   //run this when someone disconnects
   socket.on("disconnect", function(){
@@ -92,6 +94,8 @@ io.on("connection", function(socket){//this runs on first connection
     //remove the disconnecting users object
     //delete user[rmIndex];
     console.log("Disconnection with index: " + rmIndex);
+
+    userData[rmIndex] = null;
 
     //alert other clients of the disconnect
     io.sockets.emit("userDisconnect", {

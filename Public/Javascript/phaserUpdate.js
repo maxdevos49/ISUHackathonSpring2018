@@ -6,35 +6,28 @@ function update() {
 	// Controls for player
 	var direction = "NONE";
 
+	//if (controllerConnected) {
 
-	if (game.input.gamepad.supported) {
-		console.log("gamepad supported");
-	}
-	if (game.input.gamepad.active) {
-		console.log("gamepad active");
-	}
-	if (controller1.connected) {
-		console.log("gamepad connected");
-	}
+		// Controls
+		// if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
+		// {
+		// 	direction = "left";
+		// }
+		// else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
+		// {
+		// 	direction = "right";
+		// }
+		//
+		// if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
+		// {
+		// 	direction = "up";
+		// }
+		// else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
+		// {
+		// 	direction = "down";
+		// }
 
-
-	if (controllerConnected) {
-
-		if (controller1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || controller1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
-			direction = "left";
-		}
-		if (controller1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || controller1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) {
-			direction = "right";
-		}
-
-		if (controller1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || controller1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
-			direction = "up";
-		}
-		if (controller1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || controller1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1) {
-			direction = "down";
-		}
-
-	} else {
+	// } else {
 
 		if (cursorKeys.left.isDown) {
 			direction = "left";
@@ -54,7 +47,7 @@ function update() {
 		if (spaceKeyStroke.isDown) {
 			player.stab();
 		}
-	}
+	// }
 
 
 	if (direction == "NONE") {

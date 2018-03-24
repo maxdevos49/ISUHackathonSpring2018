@@ -1,5 +1,5 @@
 //jshint unused:false
-/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false*/
+/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false,myUsername: false*/
 var player;
 var otherPlayers = [];
 var stand;
@@ -31,7 +31,19 @@ function create() {
     {
         for (var x = 0; x < 128; x++)
         {
-            mapData += game.rnd.between(0,4).toString();
+            var randomNum = game.rnd.between(0,100);
+
+            if(randomNum < 1){
+            	mapData += '3';
+            }else if(randomNum < 80){
+            	mapData += '1';
+            }else if(randomNum < 85){
+            	mapData += '2';
+            }else if(randomNum < 95){
+            	mapData += '0';
+            }else if(randomNum <= 100){
+            	mapData += '4';
+            }
 
             if (x < 127)
             {
@@ -52,10 +64,12 @@ function create() {
     map.addTilesetImage('tiles', 'tiles', 20, 20);
 
     layer = map.createLayer(0);
-
+    layer.scale.set(1.40);
     layer.resizeWorld();
+    //layer.debug = true;
 
-    map.setCollisionBetween(54, 83);
+
+    map.setCollision(4);
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -63,6 +77,8 @@ function create() {
 	bmpText = game.add.bitmapText(0, -25, 'carrier_command',myUsername,5);
 	bmpText.anchor.x = 0.5;
 	player.addChild(bmpText);
+
+	player.body.collideWorldBounds = true;
 
 	allSprites.push(player);
 	game.physics.enable([player], Phaser.Physics.ARCADE);

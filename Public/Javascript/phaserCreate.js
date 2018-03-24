@@ -39,12 +39,10 @@ function create() {
         {
             var randomNum = game.rnd.between(0,100);
 
-			if((y == 0) || (y == 127)) {
+			if((y === 0) || (y === 127)) {
 				mapData += '3';
-				console.log("y is a fence");
-			} else if ((x == 0) || (x == 127)) {
+			} else if ((x === 0) || (x === 127)) {
 				mapData += '3';
-				console.log("x is a fence");
 			} else if(randomNum < 80) {
             	mapData += '1';
             } else if(randomNum < 85) {

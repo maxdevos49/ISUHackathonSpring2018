@@ -31,7 +31,7 @@ function create() {
     {
         for (var x = 0; x < 128; x++)
         {
-            mapData += '1';
+            mapData += game.rnd.between(0,4).toString();
 
             if (x < 127)
             {

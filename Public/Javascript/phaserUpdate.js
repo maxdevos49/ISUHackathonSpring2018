@@ -44,9 +44,9 @@ function update() {
 		}
 
 		if (shiftKey.isDown) {
-			currMoveSpeed = "sprint";
+			player.currMoveSpeed = "sprint";
 		} else {
-			currMoveSpeed = "normal";
+			player.currMoveSpeed = "normal";
 		}
 
 		if (spaceKeyStroke.isDown) {

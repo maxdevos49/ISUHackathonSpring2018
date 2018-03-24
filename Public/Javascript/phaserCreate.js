@@ -31,7 +31,7 @@ function create() {
     {
         for (var x = 0; x < 128; x++)
         {
-            mapData += '0';
+            mapData += '1';
 
             if (x < 127)
             {

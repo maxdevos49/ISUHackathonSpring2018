@@ -11,15 +11,18 @@ var socket;
 
 var game;
 var cursors;
+var myUsername;
 
 //initial game start here called by html body
-function init(){
+function init(username){
 	"use strict";
+	myUsername = username;
 
 	socketSetup();
 }
 
 function gameSetup() {
+	"use strict";
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
 }

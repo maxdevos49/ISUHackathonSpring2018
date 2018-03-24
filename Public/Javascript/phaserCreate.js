@@ -12,7 +12,7 @@ var spaceKeyStroke;
 var map;
 var layer;
 var allSprites = [];
-// var pad1;
+var pad1;
 // var controllerConnected;
 
 function create() {
@@ -52,8 +52,9 @@ function create() {
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
-	player = new Player(game, true, "default", id, 0, 0);
 	allSprites.push(player);
+	player = new Player(game, true, myUsername, id, 400, 300);
+	game.physics.enable([player], Phaser.Physics.ARCADE);
 	game.camera.follow(player);
 	//player.animations.play('walk', [0],0, true);
 
@@ -62,12 +63,11 @@ function create() {
 	cursorKeys = game.input.keyboard.createCursorKeys();
 	spaceKeyStroke = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-	// game.input.gamepad.start();
-    // pad1 = game.input.gamepad.pad1;
-	// game.input.onDown.add(dump, this);
+	game.input.gamepad.start();
+    pad1 = game.input.gamepad.pad1;
 
 	//Checks if controller is supported, active, and connected
-	// if (game.input.gamepad.supported && game.input.gamepad.active) {
+	// if (game.input.gamepad.supported && game.input.gamepad.active && game.input.gamepad.pad1.connected) {
 	// 	controllerConnected = true;
 	// } else {
 	// 	controllerConnected = false;
@@ -77,11 +77,3 @@ function create() {
 	joinGame();
 
 }
-
-
-// function dump() {
-//
-//     console.log(pad1._axes[0]);
-//     console.log(pad1._rawPad.axes[0]);
-//
-// }

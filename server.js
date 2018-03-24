@@ -61,7 +61,7 @@ io.on("connection", function(socket){//this runs on first connection
   console.log("new connection with index: " + nextClientNum);
 
   //reply for initial connection
-  socket.emit("connReply", user[nextClientNum]);
+  socket.emit("connReply", userData[nextClientNum]);
 
 
   //this is recieved from a newly connected client
@@ -70,7 +70,7 @@ io.on("connection", function(socket){//this runs on first connection
     //user[data.clientNum].clientUserName = data.clientUserName;
 
     //this is sent after a new client is connected and tells all the other clients to add there info
-    io.sockets.emit("loadOtherUsers", user);
+    io.sockets.emit("loadOtherUsers", userData);
 
   });
 

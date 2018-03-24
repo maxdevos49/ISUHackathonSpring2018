@@ -70,11 +70,11 @@ function socketSetup(){
 
 	});
 
-	socket.on("serverRecievePlayerData", function(data) {
+	socket.on("clientRecievePlayerData", function(data) {
 
-		// Unpack data
-		
+		//player.unpackData(data);
+		//console.log(data);
 
-	})
+	});
 
 }

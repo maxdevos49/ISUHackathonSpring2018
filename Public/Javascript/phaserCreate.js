@@ -52,8 +52,8 @@ function create() {
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
-	allSprites.push(player);
 	player = new Player(game, true, myUsername, id, 400, 300);
+	allSprites.push(player);
 	game.physics.enable([player], Phaser.Physics.ARCADE);
 	game.camera.follow(player);
 	//player.animations.play('walk', [0],0, true);

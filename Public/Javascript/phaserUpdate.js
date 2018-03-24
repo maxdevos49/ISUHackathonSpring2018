@@ -37,19 +37,23 @@ function update() {
 
 	} else {
 
-		if (cursors.left.isDown) {
+		if (cursorKeys.left.isDown) {
 			direction = "left";
 		}
 
-		if (cursors.right.isDown) {
+		if (cursorKeys.right.isDown) {
 			direction = "right";
 		}
-		if (cursors.up.isDown) {
+		if (cursorKeys.up.isDown) {
 			direction = "up";
 		}
 
-		if (cursors.down.isDown) {
+		if (cursorKeys.down.isDown) {
 			direction = "down";
+		}
+
+		if (spaceKey.isDown) {
+			player.stab();
 		}
 	}
 

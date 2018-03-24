@@ -20,7 +20,7 @@
 
 </head>
 
-<body onload="init()">
+<body>
 
 	<header>
 		<div class="heading">
@@ -56,8 +56,8 @@
 	</header>
 
 	<div id="signIn">
-		<input type="text" id="usernameInput" placeholder="Username"></input>
-		<button id="playButton">Play!</button>
+		<input type="text" id="usernameInput" placeholder="Username" value="steve"></input>
+		<button id="playButton" onclick="init(document.getElementById('usernameInput').value); document.getElementById('signIn').style.visibility = 'hidden';">Play!</button>
 	</div>
 
 </body>

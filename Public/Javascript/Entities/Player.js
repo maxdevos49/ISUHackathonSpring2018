@@ -1,7 +1,8 @@
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-ally'));
 
-	this.scale.setTo(1.5, 1.5)
+	this.scale.setTo(1.5, 1.5);
+	this.anchor.setTo(.5,.5);
 
 	this.isAlly = isAlly;
 	this.playerName = playerName;
@@ -40,7 +41,6 @@ Player.prototype.constructor = Player;
 
 Player.prototype.stab = function() {
 	if (!this.isInCooldown && !this.isStabbing) {
-		console.log("Stabbing!");
 		this.isStabbing = true;
 	}
 }
@@ -85,7 +85,6 @@ Player.prototype.update = function() {
 		switch (this.direction) {
 			case "left":
 				if (this.isStabbing) {
-					console.log("Playing animation");
 					this.animations.play("stabLeft", 12, false);
 					this.stabbingAnimationStarted = true;
 				} else {

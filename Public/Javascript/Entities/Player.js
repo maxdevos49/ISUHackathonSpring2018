@@ -32,15 +32,19 @@ Player.prototype.update = function() {
 	switch (this.direction) {
 		case "left":
 			this.x -= this.movementSpeeds[this.curMoveSpeed];
+			player.animations.play('walkLeft',8, false);
 			break;
 		case "right":
 			this.x += this.movementSpeeds[this.curMoveSpeed];
+			player.animations.play('walkRight',8, false);
 			break;
 		case "up":
 			this.y -= this.movementSpeeds[this.curMoveSpeed];
+			player.animations.play('walkUp',8, false);
 			break;
 		case "down":
 			this.y += this.movementSpeeds[this.curMoveSpeed];
+			player.animations.play('walkDown',8, false);
 			break;
 	} 
 }

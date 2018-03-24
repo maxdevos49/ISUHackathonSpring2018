@@ -8,21 +8,17 @@ function update() {
 
 	if (cursors.left.isDown) {
 		direction = "left";
-		player.animations.play('walkLeft',8, false);
 	}
 
 	if (cursors.right.isDown) {
 		direction = "right";
-		player.animations.play('walkRight',8, false);
 	}
 	if (cursors.up.isDown) {
 		direction = "up";
-		player.animations.play('walkUp',8, false);
 	}
 
 	if (cursors.down.isDown) {
 		direction = "down";
-		player.animations.play('walkDown',8, false);
 	}
 
 	player.direction = direction;

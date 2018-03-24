@@ -39,15 +39,19 @@ function create() {
         {
             var randomNum = game.rnd.between(0,100);
 
-            if(randomNum < 1){
-            	mapData += '3';
-            }else if(randomNum < 80){
+			if((y == 0) || (y == 127)) {
+				mapData += '3';
+				console.log("y is a fence");
+			} else if ((x == 0) || (x == 127)) {
+				mapData += '3';
+				console.log("x is a fence");
+			} else if(randomNum < 80) {
             	mapData += '1';
-            }else if(randomNum < 85){
+            } else if(randomNum < 85) {
             	mapData += '2';
-            }else if(randomNum < 95){
+            } else if(randomNum < 95) {
             	mapData += '0';
-            }else if(randomNum <= 100){
+            } else if(randomNum <= 100) {
             	mapData += '4';
             }
 

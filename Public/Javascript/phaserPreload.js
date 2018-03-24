@@ -1,7 +1,10 @@
+/*global game:false */
 //jshint unused:false
 
 function preload() {
-	
-	game.load.spritesheet('player', 'Images/MainSpriteSheet.png', 31, 37, 8);
+	"use strict";
+
+
+	game.load.spritesheet('player', 'Images/WalkingSpriteSheet.png', 31, 37, 8);
 
 }

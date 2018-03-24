@@ -1,5 +1,5 @@
 //linter settings
-/*global console:false, io:false, Phaser:false*/
+/*global console:false, io:false, Phaser:false, player:false*/
 //jshint unused:false
 
 
@@ -9,7 +9,6 @@ var myClient;
 var connectedCount = 0;
 var socket;
 
-
 var game;
 var cursors;
 
@@ -17,35 +16,33 @@ var cursors;
 function init(){
 	"use strict";
 
-	//call socket stuff for start
 	socketSetup();
-
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
+
 }
 
 function socketSetup(){
 	"use strict";
 
-		socket = io.connect({
+	socket = io.connect({
 		reconnection: false
 	});
 
 	socket.on("connReply", function(data){
-
 		userId = data;
-		//emit a request for all of the other users info
-		socket.emit("loadOtherUsers", );
-
 	});
 
 
 	//load new users when they connect
-	socket.on("loadOtherUsers", function(data){
+	socket.on("addUser", function(data){
 
 		connectedCount +=1;
 
 		// Unpack data
+		if (data.playerId !== userId) {
+			addUser(data);
+		}
 
 		console.log("A user connected!");
 		console.log("There are " + connectedCount + " user online!");
@@ -60,6 +57,12 @@ function socketSetup(){
 
 		connectedCount -= 1;
 
+		for (otherPlayer of otherPlayers) {
+			if (otherPlayer.playerId === data.id) {
+				otherPlayers.splice(indexOf(otherPlayer), 1);
+			}
+		}
+
 		console.log("There are " + connectedCount + " user online!");
 
 	});
@@ -70,11 +73,28 @@ function socketSetup(){
 
 	});
 
-	socket.on("serverRecievePlayerData", function(data) {
+	socket.on("clientRecievePlayerData", function(data) {
 
-		// Unpack data
+		if(data.clientId !== userId){
+			for (otherPlayer of otherPlayers) {
+				if (otherPlayer.playerId == data.player.playerId) {
+					otherPlayer.unpackData(data.player);
+				}
+			}
+		}
 		
 
-	})
+	});
 
+}
+
+function joinGame() {
+	// Add self to game
+	socket.emit("addUser", player.getData());
+}
+
+function addUser(playerData) {
+	var newPlayer = new Player(game, playerData.playerName, playerData.playerId, playerData.x, playerData.y);
+	newPlayer.unpackData(playerData);
+	otherPlayers.push(newPlayer);
 }

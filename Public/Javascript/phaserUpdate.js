@@ -1,4 +1,4 @@
-function phaserUpdate() {
+function update() {
 	// Controls for player
 	var movement_X = 0;
 	var movement_Y = 0;

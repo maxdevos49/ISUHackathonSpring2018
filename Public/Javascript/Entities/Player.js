@@ -1,3 +1,7 @@
+//linter settings
+/*global console:false, global Phaser:false*/
+//jshint unused:false
+
 class Player {
 	constructor(game, initialX, initialY) {
 		Phaser.Sprite.call(this, game, initialX, initialY);

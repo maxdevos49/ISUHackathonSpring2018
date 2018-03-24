@@ -4,11 +4,9 @@
 
 
 //init variables here
-var user = [];
 var userId;
 var myClient;
 var connectedCount = 0;
-var connection = false;
 var socket;
 
 
@@ -37,7 +35,7 @@ function socketSetup(){
 
 		userId = data;
 		//emit a request for all of the other users info
-		socket.emit("loadOtherUsers", user[myClient]);
+		socket.emit("loadOtherUsers", );
 
 	});
 
@@ -47,7 +45,7 @@ function socketSetup(){
 
 		connectedCount +=1;
 
-		connection = true;
+		// Unpack data
 
 		console.log("A user connected!");
 		console.log("There are " + connectedCount + " user online!");
@@ -68,14 +66,15 @@ function socketSetup(){
 
 	socket.on("disconnect", function(){
 
-		connection = false;
-
 		console.log("connection Lost... reload your page");
 
 	});
 
 	socket.on("serverRecievePlayerData", function(data) {
+
+		// Unpack data
 		
+
 	})
 
 }

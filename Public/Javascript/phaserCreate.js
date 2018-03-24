@@ -4,7 +4,7 @@ var player;
 
 function create() {
 	"use strict";
-	player = new Player(game, 0, 0);
+	player = new Player(game, "default", data, 0, 0);
 	cursors = game.input.keyboard.createCursorKeys();
 
 }

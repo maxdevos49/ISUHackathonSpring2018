@@ -20,6 +20,12 @@ var layer;
 var pad1;
 var bmpText;
 // var controllerConnected;
+var usernameTxtBox;
+var healthBar;
+var staminaBar;
+var serverStatus;
+var OnlineUsersTxt;
+var hud;
 
 
 function create() {
@@ -105,6 +111,23 @@ function create() {
 	// 	controllerConnected = false;
 	// }
 
+	hud = game.add.group();
+
+
+		//add health bar, online users, and UserName
+	usernameTxtBox = game.add.bitmapText(0, 0, 'carrier_command',"Username: " +  myUsername,10);
+	healthBar = game.add.bitmapText(0, 15, 'carrier_command',"Health: ", 10);
+	staminaBar = game.add.bitmapText(0, 30, 'carrier_command', "Stamina: ", 10);
+
+	serverStatus = game.add.bitmapText(600,0,'carrier_command', "serverStatus: ",10);
+	OnlineUsersTxt = game.add.bitmapText(600,15, 'carrier_command', "Players: " + connectedCount, 10);
+	hud.add(usernameTxtBox);
+	hud.add(healthBar);
+	hud.add(staminaBar);
+	hud.add(serverStatus);
+	hud.add(OnlineUsersTxt);
+
+	hud.fixedToCamera = true;
 
 	joinGame();
 

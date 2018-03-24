@@ -11,7 +11,7 @@ var cursors;
 
 function create() {
 	"use strict";
-	player = new Player(game, "default", userId, 0, 0);
+	player = new Player(game, "default", id, 0, 0);
 
 	stand = player.animations.add('stand',[0], 0, true);
 	walkDown = player.animations.add('walkDown',[0,1], 0, true);

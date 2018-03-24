@@ -21,19 +21,17 @@ function update() {
 		direction = "down";
 	}
 
-	player.direction = direction;
-
 	if (direction == "NONE") {
-
 		player.moving = false;
-
+	} else {
+		player.direction = direction;
+		player.moving = true;
 	} 
-
-	player.moving = true;
+	
 	var clientData = {
-		"clientId" : userId,
+		"id" : id,
 		"player" : player.getData()
 	};
-	socket.emit("serverRecievePlayerData", clientData)
+	socket.emit("userDataUpdate", clientData);
 
 }

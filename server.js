@@ -44,73 +44,114 @@ app.get('/index.html', (req, res) => {
 //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/Socket IO CODE\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
 //init variables
-var userData = [];
-var num_Id = [];
+var users = {};
 var nextClientId = 0;
 
 //process socket request
 io.on("connection", function(socket){//this runs on first connection
 
   //give client a socket id
-  num_Id[nextClientId] = socket.id;
+  users[nextClientId] = {};
+  users[nextClientId].socketId = socket.id;
 
-  //create a object of the user info
-  //user[client] = new userInfo(socket.id, nextClientId);
+  console.log("new connection with Id: " + nextClientId);
+  socket.emit("idAssign", {"id" : nextClientId});
+  nextClientId++;
 
-  //alert the console of a new user
-  console.log("new connection with index: " + nextClientId);
-
-  //reply for initial connection
-  socket.emit("connReply", nextClientId);
-
-
-  //this is recieved from a newly connected client
-  socket.on("addUser", function(data){
-
-    //this is sent after a new client is connected and tells all the other clients to add there info
-    io.sockets.emit("addUser", data);
+  socket.on("addUser", function(userData) {
+    console.log("Adding user to game with id: " + userData.id);
+    var clientId = userData.id;
+    users[clientId].data = userData
+    // Send new user data to all sockets
+    io.sockets.emit("addUsers", [userData]);
+    // Send all connected users to the new user
+    var userDatas = [];
+    for (var key in Object.keys(users)) {
+      console.log(key); 
+      console.log("giving new client user data for user: " + users[key].data.id);
+      userDatas.push(users[key].data);
+    }
+    socket.emit("addUsers", userDatas);
 
   });
 
-  socket.on("getUsers", function() {
-    socket.emit("recieveUsers", userData);
-  }); 
+  socket.on("userDataUpdate", function(userData) {
+    //console.log("Updating for user with id: " + userData.id);
+    users[userData.id].data = userData;
+    io.sockets.emit("updateUser", userData);
+  });
 
-  //run this when someone disconnects
-  socket.on("disconnect", function(){
-
-    var rmIndex;
-    //loop through all the user objects
-    for (var i = 0; i < num_Id.length ;i++ ){
-
-      //check for the disconnected users object
-      if (num_Id[i] == socket.id){
-
-        //save the disconnecting users index
-        var rmIndex = i;
+  socket.on("disconnect", function() {
+    console.log("User disconnected")
+    var remainingUsers = {};
+    for (var id in Object.keys(users)) {
+      console.log(id);
+      if (users[id].socketId == socket.id) {
+        io.sockets.emit("removeUser", {"id" : id})
+        break;
+      } else {
+        remainingUsers[id] = users[id];
       }
     }
-
-    //remove the disconnecting users object
-    //delete user[rmIndex];
-    console.log("Disconnection with index: " + rmIndex);
-
-    userData[rmIndex] = null;
-
-    //alert other clients of the disconnect
-    io.sockets.emit("userDisconnect", {
-      id: rmIndex
-    });
-
+    users = remainingUsers;
   });
 
-  socket.on("serverRecievePlayerData", function(data) {
-    userData[data.clientId] = data;
+  // //create a object of the user info
+  // //user[client] = new userInfo(socket.id, nextClientId);
 
-    io.sockets.emit("clientRecievePlayerData", data);
+  // //alert the console of a new user
+  // console.log("new connection with index: " + nextClientId);
 
-  });
+  // //reply for initial connection
+  // socket.emit("connReply", nextClientId);
 
-  //increment this once per connection for client index/clientNum
-  nextClientId++;
+  // //this is recieved from a newly connected client
+  // socket.on("addUser", function(data){
+
+  //   //this is sent after a new client is connected and tells all the other clients to add there info
+  //   io.sockets.emit("addUser", data);
+
+  // });
+
+  // socket.on("getUsers", function() {
+  //   socket.emit("recieveUsers", userData);
+  // }); 
+
+  // //run this when someone disconnects
+  // socket.on("disconnect", function() {
+
+  //   var rmIndex;
+  //   //loop through all the user objects
+  //   for (var i = 0; i < num_Id.length ;i++ ){
+
+  //     //check for the disconnected users object
+  //     if (num_Id[i] == socket.id){
+
+  //       //save the disconnecting users index
+  //       var rmIndex = i;
+  //     }
+  //   }
+
+  //   //remove the disconnecting users object
+  //   //delete user[rmIndex];
+  //   console.log("Disconnection with index: " + rmIndex);
+
+  //   delete userData[i];
+
+  //   //alert other clients of the disconnect
+  //   io.sockets.emit("userDisconnect", {
+  //     id: rmIndex
+  //   });
+
+  // });
+
+  // socket.on("serverRecievePlayerData", function(data) {
+  //   userData[data.clientId] = data;
+
+  //   io.sockets.emit("clientRecievePlayerData", data);
+
+  // });
+
+  // //increment this once per connection for client index/clientNum
+  // nextClientId++;
 });

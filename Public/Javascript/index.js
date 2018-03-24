@@ -1,5 +1,5 @@
 //linter settings
-/*global console:false, io:false*/
+/*global console:false, io:false, Phaser:false*/
 //jshint unused:false
 
 

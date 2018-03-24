@@ -74,8 +74,6 @@ io.on("connection", function(socket){//this runs on first connection
 
   });
 
-  socket.on
-
   //run this when someone disconnects
   socket.on("disconnect", function(){
 

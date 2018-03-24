@@ -31,7 +31,6 @@ function init(){
 
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
-	cursors = game.input.keyboard.createCursorKeys();
 }
 
 function socketSetup(){

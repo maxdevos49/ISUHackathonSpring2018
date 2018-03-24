@@ -23,8 +23,6 @@ function create() {
 	//game.physics.startSystem(Phaser.Physics.BOX2D);
 
 	cursors = game.input.keyboard.createCursorKeys();
-
-	//call socket stuff for start
-	socketSetup();
+	joinGame();
 
 }

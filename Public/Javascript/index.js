@@ -16,24 +16,21 @@ var cursors;
 function init(){
 	"use strict";
 
+	socketSetup();
 	//call phaser init here
 	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Medivial Warefare', { preload: preload, create: create, update: update, render: render });
-	
+
 }
 
 function socketSetup(){
 	"use strict";
 
-		socket = io.connect({
+	socket = io.connect({
 		reconnection: false
 	});
 
 	socket.on("connReply", function(data){
-
 		userId = data;
-		//emit a request for all of the other users info
-		socket.emit("addUser", player.getData());
-
 	});
 
 
@@ -43,7 +40,9 @@ function socketSetup(){
 		connectedCount +=1;
 
 		// Unpack data
-		addUser(data);
+		if (data.playerId !== userId) {
+			addUser(data);
+		}
 
 		console.log("A user connected!");
 		console.log("There are " + connectedCount + " user online!");
@@ -58,6 +57,12 @@ function socketSetup(){
 
 		connectedCount -= 1;
 
+		for (otherPlayer of otherPlayers) {
+			if (otherPlayer.playerId === data.id) {
+				otherPlayers.splice(indexOf(otherPlayer), 1);
+			}
+		}
+
 		console.log("There are " + connectedCount + " user online!");
 
 	});
@@ -71,9 +76,9 @@ function socketSetup(){
 	socket.on("clientRecievePlayerData", function(data) {
 
 		if(data.clientId !== userId){
-			for (player in otherPlayers) {
-				if (player.playerId == data.player.playerId) {
-					player.unpackData(data.player);
+			for (otherPlayer of otherPlayers) {
+				if (otherPlayer.playerId == data.player.playerId) {
+					otherPlayer.unpackData(data.player);
 				}
 			}
 		}
@@ -81,6 +86,11 @@ function socketSetup(){
 
 	});
 
+}
+
+function joinGame() {
+	// Add self to game
+	socket.emit("addUser", player.getData());
 }
 
 function addUser(playerData) {

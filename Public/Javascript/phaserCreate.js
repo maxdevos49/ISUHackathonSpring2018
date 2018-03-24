@@ -13,6 +13,7 @@ var wKey;
 var aKey;
 var sKey;
 var dKey;
+var shiftKey;
 var map;
 var layer;
 var allSprites = [];
@@ -70,6 +71,7 @@ function create() {
 	aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	sKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+	shiftKey = game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
 
 	game.input.gamepad.start();
     pad1 = game.input.gamepad.pad1;

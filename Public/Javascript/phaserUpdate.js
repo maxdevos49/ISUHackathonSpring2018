@@ -43,6 +43,12 @@ function update() {
 			direction = "down";
 		}
 
+		if (shiftKey.isDown) {
+			currMoveSpeed = "sprint";
+		} else {
+			currMoveSpeed = "normal";
+		}
+
 		if (spaceKeyStroke.isDown) {
 			player.stab();
 		}

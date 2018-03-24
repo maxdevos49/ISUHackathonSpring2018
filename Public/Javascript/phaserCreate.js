@@ -2,6 +2,7 @@
 /*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false*/
 var player;
 var otherPlayers = [];
+var allSprites = [];
 var stand;
 var walkDown;
 var walkUp;
@@ -16,7 +17,6 @@ var dKey;
 var shiftKey;
 var map;
 var layer;
-var allSprites = [];
 var pad1;
 var bmpText;
 // var controllerConnected;

@@ -35,7 +35,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.sword = this.addChild(game.add.sprite(0, 0, "sword"));
 	game.physics.enable([this.sword], Phaser.Physics.ARCADE);
 	this.sword.anchor.setTo(0.5, 0.5)
-	this.sword.body.setSize(0,0,0,0);
+			
 	this.sword.damage = 10;
 	this.sword.knockbackForce = 500;
 
@@ -61,27 +61,27 @@ Player.prototype.stab = function() {
 }
 
 Player.prototype.onHit = function(weapon) {
+	console.log("Ouch");
+	if (!this.hasBeenStabbed) {
 	
-	if (hasBeenStabbed) {
-		return; 
-	}
+		this.health -= weapon.damage;
+		this.hasBeenStabbed = true;
+		this.knockbackForce = weapon.knockbackForce;
 
-	this.health -= weapon.damage;
-	this.hasBeenStabbed = true;
-	this.knockbackForce = weapon.knockbackForce;
+		// Find direction from of sword from player
+		var dx = weapon.x - this.x;
+		var dy = weapon.y = this.y;
+		var angle = Math.atan2(dy, dx);
+		if (angle > 45 && angle <= 135) {
+			this.knockbackDirection = "up";
+		} else if (angle > 135 && angle <= 225) {
+			this.knockbackDirection = "left";
+		} else if (angle > 225 && angle <= 315) {
+			this.knockbackDirection = "down"
+		} else {
+			this.knockbackDirection = "right"
+		}
 
-	// Find direction from of sword from player
-	var dx = weapon.x - this.x;
-	var dy = weapon.y = this.y;
-	var angle = Math.atan2(dy, dx);
-	if (angle > 45 && angle <= 135) {
-		this.knockbackDirection = "up";
-	} else if (angle > 135 && angle <= 225) {
-		this.knockbackDirection = "left";
-	} else if (angle > 225 && angle <= 315) {
-		this.knockbackDirection = "down"
-	} else {
-		this.knockbackDirection = "right"
 	}
 
 }
@@ -109,8 +109,8 @@ Player.prototype.update = function() {
 		if (this.knockbackForce < 0) {
 			this.hasBeenStabbed = false;
 		}
-		return;
-	}
+
+	} else {
 
 	if (this.isStabbing) {
 		this.stabTimer++;
@@ -221,6 +221,7 @@ Player.prototype.update = function() {
 					this.animations.frame = 0;
 				}
 				break;
+			}
 		}
 	}
 }

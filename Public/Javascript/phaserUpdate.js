@@ -68,6 +68,13 @@ function update() {
 		player.moving = true;
 	}
 
+	for (var i = 0; i < otherPlayers.length; i++) {
+		console.log(otherPlayers[i].sword);
+		if (Phaser.Rectangle.intersects(player, otherPlayers[i].sword)) {
+			player.onHit(otherPlayers[i].sword);
+		}
+	}
+
 	var clientData = {
 		"id" : id,
 		"player" : player.getData()

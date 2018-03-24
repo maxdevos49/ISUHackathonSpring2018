@@ -83,3 +83,9 @@ function socketSetup(){
 	});
 
 }
+
+function addUser(playerData) {
+	var newPlayer = new Player(game, playerData.playerName, playerData.playerId, playerData.x, playerData.y);
+	newPlayer.unpackData(playerData);
+	otherPlayers.push(newPlayer);
+}

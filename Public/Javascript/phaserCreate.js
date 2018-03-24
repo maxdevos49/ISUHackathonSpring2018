@@ -39,9 +39,18 @@ function create() {
         {
             var randomNum = game.rnd.between(0,100);
 
-			if((y === 0) || (y === 127)) {
-				mapData += '3';
-			} else if ((x === 0) || (x === 127)) {
+
+			if ((x === 0) && (y === 0)) {             //Top left fence
+				mapData += '6';
+			} else if ((x === 0) && (y === 127)) {    //Bottom left fence
+				mapData += '8';
+			} else if ((x === 127) && (y === 0)) {    //Top right fence
+				mapData += '5';
+			} else if ((x === 127) && (y === 127)) {  //Bottom right fence
+				mapData += '7';
+			} else if((y === 0) || (y === 127)) {     //Top and Bottom fence
+				mapData += '9';
+			} else if ((x === 0) || (x === 127)) {    //Left and Right fence
 				mapData += '3';
 			} else if(randomNum < 80) {
             	mapData += '1';

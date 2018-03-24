@@ -2,10 +2,8 @@ body {
     font-family: 'Cinzel Decorative', cursive;
     background-color: gray;
 
-    /* font-family: 'Montez', cursive;
-    font-family: 'Bilbo Swash Caps', cursive;
-    font-family: 'Condiment', cursive;
-    font-family: 'Bilbo', cursive; */
+    margin: 0px;
+    padding: 0px;
 }
 
 /* .heading {
@@ -19,13 +17,20 @@ header {
 }
 
 nav {
+    background-color: dodgerblue;
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
 
-    background-color: dodgerblue;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .navElement {

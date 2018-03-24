@@ -42,7 +42,7 @@ function socketSetup(){
 
 
 	//load new users when they connect
-	socket.on("loadOtherUsers", function(data){
+	socket.on("addUser", function(data){
 
 		connectedCount +=1;
 

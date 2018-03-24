@@ -65,12 +65,12 @@ io.on("connection", function(socket){//this runs on first connection
 
 
   //this is recieved from a newly connected client
-  socket.on("loadOtherUsers", function(data){
+  socket.on("addUser", function(data){
 
     //user[data.clientNum].clientUserName = data.clientUserName;
 
     //this is sent after a new client is connected and tells all the other clients to add there info
-    io.sockets.emit("loadOtherUsers", userData);
+    io.sockets.emit("addUser", data);
 
   });
 

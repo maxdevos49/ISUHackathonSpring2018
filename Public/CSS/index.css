@@ -1,19 +1,19 @@
 body {
-    font-family: 'Cinzel Decorative', cursive;
-    background-color: gray;
-
     margin: 0px;
     padding: 0px;
+
+    font-family: 'Cinzel Decorative', cursive;
+    background-color: gray;
 }
 
-/* .heading {
+.heading {
+    font-weight: bold;
     display: flex;
     align-content: center;
-} */
+}
 
 header {
     font-variant: small-caps;
-    font-weight: bold;
 }
 
 nav {
@@ -24,8 +24,6 @@ nav {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-
-
 }
 
 a {
@@ -42,4 +40,9 @@ a {
 
 .navElement:hover {
     background-color: lightgray;
+}
+
+canvas {
+    margin: 20px auto 10px auto;
+
 }

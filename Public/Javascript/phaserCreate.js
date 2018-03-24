@@ -10,6 +10,8 @@ var walkRight;
 var cursors;
 var map;
 var layer;
+var controller1;
+var controllerConnected;
 
 function create() {
 	"use strict";
@@ -55,6 +57,19 @@ function create() {
 	//game.physics.startSystem(Phaser.Physics.BOX2D);
 
 	cursors = game.input.keyboard.createCursorKeys();
+
+	game.input.gamepad.start();
+
+	// To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.gamepadX, where X = gamepad 1-4
+    controller1 = game.input.gamepad.controller1;
+
+	if (game.input.gamepad.supported && game.input.gamepad.active && controller1.connected) {
+		controllerConnected = true;
+	} else {
+		controllerConnected = false;
+	}
+
+
 	joinGame();
 
 }

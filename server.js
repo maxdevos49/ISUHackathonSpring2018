@@ -62,7 +62,7 @@ io.on("connection", function(socket){//this runs on first connection
   console.log("new connection with index: " + client);
 
   //reply for initial connection
-  socket.emit("connReply", user[client]);
+  socket.emit("connReply", client);
 
 
   //this is recieved from a newly connected client

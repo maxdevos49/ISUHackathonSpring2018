@@ -19,7 +19,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 
 	bmpText = game.add.bitmapText(0, -25, 'carrier_command', playerName ,5);
  	bmpText.anchor.x = 0.5;
- 	this..addChild(bmpText);
+ 	this.addChild(bmpText);
 
 	this.health = 100;
 	this.stamina = 100;
@@ -76,7 +76,7 @@ Player.prototype.setPace = function(sprint) {
 	}
 }
 
-player.prototype.isDead = function() {
+Player.prototype.isDead = function() {
 	return health <= 0;
 }
 

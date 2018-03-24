@@ -62,8 +62,7 @@ function update() {
 	socket.emit("userDataUpdate", clientData);
 
 	// Z Index
-	console.log(allSprites);
-	var allSpritesInCameraSorted = allSprites.filter(sprite => ((sprite != null) && sprite.inCamera))
+	var allSpritesInCameraSorted = allSprites.filter(sprite => sprite.inCamera)
 			.sort(function(sprite1, sprite2) {
 				return sprite1.y > sprite2.y;
 			});

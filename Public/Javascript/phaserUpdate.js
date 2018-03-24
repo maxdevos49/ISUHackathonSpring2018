@@ -63,7 +63,13 @@ function update() {
 	};
 	socket.emit("userDataUpdate", clientData);
 
-	// Adjust levels of sprites
-	game.world.bringToTop(player);
+	// Z Index
+	var allSpritesInCameraSorted = allSprites.filter(sprite => sprite.inCamera)
+			.sort(function(sprite1, sprite2) {
+				return sprite1.y > sprite2.y;
+			});
+	for (var i = 0; i < allSpritesInCameraSorted.length; i++) {
+		game.world.bringToTop(allSpritesInCameraSorted[i]);
+	}
 
 }

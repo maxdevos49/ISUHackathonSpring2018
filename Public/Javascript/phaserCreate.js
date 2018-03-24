@@ -11,6 +11,7 @@ var cursorKeys;
 var spaceKeyStroke;
 var map;
 var layer;
+var allSprites = [];
 // var pad1;
 // var controllerConnected;
 
@@ -52,7 +53,7 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	player = new Player(game, true, "default", id, 0, 0);
-	game.physics.enable([player], Phaser.Physics.ARCADE);
+	allSprites.push(player);
 	game.camera.follow(player);
 	//player.animations.play('walk', [0],0, true);
 

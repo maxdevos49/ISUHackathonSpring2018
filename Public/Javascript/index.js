@@ -47,6 +47,7 @@ function socketSetup(){
 				console.log(userDatas[i]);
 				addUser(userDatas[i]);
 				connection = true;
+				connectedCount++;
 			}
 		}
 	});
@@ -71,6 +72,7 @@ function socketSetup(){
 				allSprites.splice(allSprites.indexOf(otherPlayers[i]), 1);
 				otherPlayers[i].destroy();
 				otherPlayers.splice(i, 1);
+				connectedCount--;
 			}
 		}
 	});

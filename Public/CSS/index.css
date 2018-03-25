@@ -3,7 +3,7 @@ body {
     padding: 0px;
 
     font-family: 'Cinzel Decorative', cursive;
-    background-color: gray;
+    background: radial-gradient(circle, darkgray, gray);
 }
 
 header {
@@ -44,8 +44,8 @@ a {
 }
 
 .navElement {
-    margin: 5px;
-    padding: 5px;
+    margin: 6px 12px 6px 12px;
+    padding: 6px;
 
     font-size: 24px;
 }
@@ -54,6 +54,21 @@ a {
     background-color: lightgray;
 }
 
+#infoNavElement {
+    margin: 6px;
+    padding: 6px;
+
+    font-size: 24px;
+}
+
+
+#signInInfo {
+    margin: 15px;
+    font-size: 25px;
+    font-variant: small-caps;
+
+    text-align: center;
+}
 
 #signIn {
     margin: 15px;
@@ -66,7 +81,7 @@ a {
 
 #usernameInput {
     font-family: 'Cinzel Decorative', cursive;
-    font-size: 18px;
+    font-size: 23px;
     font-variant: small-caps;
 
     background-color: lightgray;
@@ -76,7 +91,7 @@ a {
 
 #playButton {
     font-family: 'Cinzel Decorative', cursive;
-    font-size: 18px;
+    font-size: 23px;
     font-variant: small-caps;
 
     background-color: forestgreen;

@@ -79,9 +79,10 @@ io.on("connection", function(socket){//this runs on first connection
 
   });
 
-  socket.on("addGrave", function(grave) {
-    graves.push(grave);
-    socket.emit("addGraves", [grave]);
+  socket.on("sendGrave", function(data) {
+    
+    io.sockets.emit("sendGraves", data);
+
   });
 
   socket.on("userDataUpdate", function(userData) {

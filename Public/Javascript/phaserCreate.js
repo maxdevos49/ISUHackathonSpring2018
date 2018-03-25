@@ -29,6 +29,7 @@ var graves = [];
 var floor;
 var healthImg;
 var staminaImg;
+var deathBar;
 
 function create() {
 	"use strict";
@@ -131,6 +132,7 @@ function create() {
 	usernameTxtBox = game.add.bitmapText(0, 0, 'carrier_command',"Username: " +  myUsername,10);
 	healthBar = game.add.bitmapText(0, 15, 'carrier_command',"Health: ", 10);
 	staminaBar = game.add.bitmapText(0, 30, 'carrier_command', "Stamina: ", 10);
+	deathBar = game.add.bitmapText(0, 45, 'carrier_command', "Deaths: ", 10);
 
 	serverStatus = game.add.bitmapText(550,0,'carrier_command', "serverStatus: ",10);
 	OnlineUsersTxt = game.add.bitmapText(550,15, 'carrier_command', "Players: " + connectedCount, 10);
@@ -147,6 +149,7 @@ function create() {
 	staminaBar.addChild(staminaImg);
 
 	hud.add(usernameTxtBox);
+	hud.add(deathBar);
 	hud.add(healthBar);
 	hud.add(staminaBar);
 	hud.add(serverStatus);

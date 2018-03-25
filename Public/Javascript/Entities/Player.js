@@ -1,10 +1,12 @@
+/*global Phaser:false, Player:false*/
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
+	"use strict";
 	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
 	game.physics.enable([this], Phaser.Physics.ARCADE);
 	this.enableBody = true;
 
 	this.scale.setTo(2, 2);
-	this.anchor.setTo(.5,.5);
+	this.anchor.setTo(0.5,0.5);
 
 	this.isAlly = isAlly;
 	this.playerName = playerName;
@@ -15,11 +17,12 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.movementSpeeds = {
 		"normal":150,
 		"sprint":260
-	}
+	};
 
-	bmpText = game.add.bitmapText(0, -25, 'carrier_command', playerName ,5);
- 	bmpText.anchor.x = 0.5;
- 	this.addChild(bmpText);
+	var playerNametag;
+	playerNametag = game.add.bitmapText(0, -25, 'carrier_command', playerName ,5);
+ 	playerNametag.anchor.x = 0.5;
+ 	this.addChild(playerNametag);
 
 	this.health = 100;
 	this.stamina = 100;
@@ -50,7 +53,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 
 	this.sword = game.add.sprite(0, 0, "sword");
 	game.physics.enable([this.sword], Phaser.Physics.ARCADE);
-	this.sword.anchor.setTo(0.5, 0.5)
+	this.sword.anchor.setTo(0.5, 0.5);
 	this.sword.enableBody = true;
 			
 	this.sword.damage = 35;
@@ -65,31 +68,37 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.animations.add('stabRight', ['right1', 'stabRight', 'right1', 'stabRight'], 'right1', 0, true);
 	this.animations.add('stabLeft', ['left1', 'stabLeft', 'left1', 'stabLeft', 'left1'], 0, true);
 
-}
+};
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.stab = function() {
+	"use strict";
 	if (!this.isInCooldown && !this.isStabbing) {
 		this.isStabbing = true;	
 	}
-}
+};
 
 Player.prototype.setPace = function(sprint) {
+	"use strict";
 	if (sprint && this.stamina > this.requiredStaminaToStartRunning) {
 		this.curMoveSpeed = "sprint";
 	} else {
-		this.curMoveSpeed = "normal"
+		this.curMoveSpeed = "normal";
+		
 	}
-}
+};
 
 Player.prototype.isDead = function() {
+	"use strict";
 	return this.health <= 0;
-}
+};
 
 Player.prototype.onHit = function(weapon, attackerId) {
+	"use strict";
 	console.log("Ouch");
+
 	if (!this.hasBeenStabbed) {
 	
 		this.health -= weapon.damage;
@@ -112,19 +121,20 @@ Player.prototype.onHit = function(weapon, attackerId) {
 		} else if (angle > 135 && angle <= 225) {
 			this.knockbackDirection = "left";
 		} else if (angle > 225 && angle <= 315) {
-			this.knockbackDirection = "down"
+			this.knockbackDirection = "down";
 		} else {
-			this.knockbackDirection = "right"
+			this.knockbackDirection = "right";
 		}
 
 	}
 
-}
+};
 
 Player.prototype.update = function() {
-	
+	"use strict";
+
 	this.sword.x = this.x;
-	this.sword.y = this.y
+	this.sword.y = this.y;
 
 	// Don't allow any other inputs if you are being knocked back
 	if (this.hasBeenStabbed) {
@@ -151,15 +161,16 @@ Player.prototype.update = function() {
 	} else {
 
 	if (this.curMoveSpeed == "sprinting" && this.stamina > 0) {
-		this.stamina -= 4;
+		//this.stamina -= 1;
+		console.log(this.stamina);
 	} else if (this.curMoveSpeed == "sprinting") {
 		this.curMoveSpeed = "normal";
 	} else {
 		if (this.stamina <= 20) {
-			this.stamina += 1;
+			//this.stamina += 1;
 		} else {
-			this.stamina += 5;
-			this.stamina = (this.stamina > 100) ? 100 : stamina;
+			//this.stamina += 5;
+			//this.stamina = (this.stamina > 100) ? 100 : stamina;
 		}
 	}
 
@@ -273,9 +284,10 @@ Player.prototype.update = function() {
 			}
 		}
 	}
-}
+};
 
 Player.prototype.getData = function() {
+	"use strict";
 	return {
 		"x" : this.x,
 		"y" : this.y,
@@ -287,10 +299,11 @@ Player.prototype.getData = function() {
 		"isStabbing" : this.isStabbing,
 		"hasBeenStabbed" : this.hasBeenStabbed,
 		"health" : this.health
-	}
-}
+	};
+};
 
 Player.prototype.unpackData = function(data) {
+	"use strict";
 	this.x = data.x;
 	this.y = data.y;
 	this.playerName = data.playerName;
@@ -303,4 +316,5 @@ Player.prototype.unpackData = function(data) {
 	}
 	this.hasBeenStabbed = data.hasBeenStabbed;
 	this.health = data.health;
-}
+};
+

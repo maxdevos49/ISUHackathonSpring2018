@@ -1,4 +1,5 @@
-/*global cursors:false, player:false, userId:false, socket:false*/
+/*global cursors:false, player:false, userId:false, socket:false,pad1:false, Phaser:false,cursorKeys:false,otherPlayers:false,
+healthImg:false, staminaImg:false,aKey:false,dKey:false,sKey:false,wKey:false,game:false,id:false,allSprite:false*/
 //jshint unused:false
 
 function update() {
@@ -52,8 +53,16 @@ function update() {
 
 	if (shiftKey.isDown) {
 		player.setPace(true);
+		if(player.stamina > 0){
+			player.stamina -= 0.5;
+		}
+		
 	} else {
 		player.setPace(false);
+		if(player.stamina < 100){
+			player.stamina += 0.5;
+		}
+		
 	}
 
 	if (spaceKeyStroke.isDown) {

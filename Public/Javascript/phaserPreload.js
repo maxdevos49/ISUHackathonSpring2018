@@ -21,6 +21,6 @@ function preload() {
 	game.load.image('Bush', 'Images/Bush.png');
 	game.load.image('hPotion', 'Images/HealthPotion.png');
 	game.load.image('sPotion', 'Images/StaminaPotion.png');
-	game.load.audio('sfx', 'Music/sfx_mixdown.mp3');
+	game.load.audio('sfx', 'Music/mixdown_sfx.ogg');
 
 }

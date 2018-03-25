@@ -15,6 +15,7 @@ var myUsername;
 var connection = false;
 var mapData;
 var obstacleData;
+var floor;
 
 //initial game start here called by html body
 function init(username){

@@ -32,9 +32,12 @@ var staminaImg;
 var deathBar;
 var obstacles;
 var type;
+var obstaclesArray = [];
 
 function create() {
 	"use strict";
+
+	game.physics.startSystem(Phaser.Physics.ARCADE);
 
     game.cache.addTilemap('dynamicMap', null, mapData, Phaser.Tilemap.CSV);
 
@@ -63,16 +66,20 @@ function create() {
     	}
 
     	obstacles = game.add.sprite(obstacleData[i].x,obstacleData[i].y,type);
+    	obstacles.anchor.set(0,1);
     	obstacles.scale.set(2,2);
-    	game.world.bringToTop(obstacles);
+    	obstaclesArray[i] = obstacles;
+    	game.physics.enable(obstaclesArray[i], Phaser.Physics.ARCADE);
 
-    	//layer.addChild(obstacles);
+    	obstaclesArray[i].body.setSize(obstaclesArray[i].width/4, obstaclesArray[i].height/10, obstaclesArray[i].width/8, obstaclesArray[i].height/2.5);
+    	console.log(obstaclesArray[i].body);
+
+    	obstaclesArray[i].body.collideWorldBounds = true;
+    	obstaclesArray[i].body.immovable = true;
+    	allSprites.push(obstaclesArray[i]);
+    	
+
     }
-
-
-    //map.setCollision(4);
-
-	game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	player = new Player(game, true, myUsername, id, 400, 300);
 	bmpText = game.add.bitmapText(0, -25, 'carrier_command',myUsername,5);
@@ -105,30 +112,36 @@ function create() {
 	// } else {
 	// 	controllerConnected = false;
 	// }
-
 	hud = game.add.group();
-
+	floor = game.add.image(0, 0, "health");
+	floor.width = 800;
+	floor.height = 70;
+	floor.tint = "grey";
+	floor.alpha = 0.4;
 
 		//add health bar, online users, and UserName
-	usernameTxtBox = game.add.bitmapText(0, 0, 'carrier_command',"Username: " +  myUsername,10);
-	healthBar = game.add.bitmapText(0, 15, 'carrier_command',"Health: ", 10);
-	staminaBar = game.add.bitmapText(0, 30, 'carrier_command', "Stamina: ", 10);
-	deathBar = game.add.bitmapText(0, 45, 'carrier_command', "Deaths: ", 10);
+	usernameTxtBox = game.add.bitmapText(2, 2, 'carrier_command',"Username: " +  myUsername,12);
+	healthBar = game.add.bitmapText(2, 21, 'carrier_command',"Health: ", 12);
+	staminaBar = game.add.bitmapText(2, 38, 'carrier_command', "Stamina: ", 12);
+	deathBar = game.add.bitmapText(2, 55, 'carrier_command', "Deaths: ", 12);
 
-	serverStatus = game.add.bitmapText(550,0,'carrier_command', "serverStatus: ",10);
-	OnlineUsersTxt = game.add.bitmapText(550,15, 'carrier_command', "Players: " + connectedCount, 10);
+	serverStatus = game.add.bitmapText(510,2,'carrier_command', "serverStatus: ",12);
+	OnlineUsersTxt = game.add.bitmapText(510,19, 'carrier_command', "Players: " + connectedCount, 12);
 
-	healthImg = game.add.image(90, 0, 'health');
+	healthImg = game.add.image(107, 0, 'health');
 	healthImg.width = 200;
-	healthImg.height = 10;
+	healthImg.height = 12;
 
-	staminaImg = game.add.image(90, 0, 'stamina');
+	staminaImg = game.add.image(107, 0, 'stamina');
 	staminaImg.width = 200;
-	staminaImg.height = 10;
+	staminaImg.height = 12;
 
 	healthBar.addChild(healthImg);
 	staminaBar.addChild(staminaImg);
 
+
+	
+	hud.add(floor);
 	hud.add(usernameTxtBox);
 	hud.add(deathBar);
 	hud.add(healthBar);
@@ -138,10 +151,7 @@ function create() {
 
 	hud.fixedToCamera = true;
 
-
-	//var splashscreen = game.add.sprite(0,0,'bricks');
-
-
+	//game.world.bringToTop(hud);
 	joinGame();
 
 }

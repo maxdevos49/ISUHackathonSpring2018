@@ -108,6 +108,15 @@ function update() {
 		game.world.bringToTop(allSpritesInCameraSorted[i]);
 	}
 
+	// Z Index
+	// var allImagesInCameraSorted = allImages.filter(image => image.inCamera)
+	// 		.sort(function(image1, image2) {
+	// 			return image1.y > image2.y;
+	// 		});
+	// for (var i = 0; i < allImagesInCameraSorted.length; i++) {
+	// 	game.world.bringToTop(allImagesInCameraSorted[i]);
+	// }
+
 	OnlineUsersTxt.text = "Players: " + connectedCount;
 	serverStatus.text = (connection === true) ? "Server Status: Green" : "Server Status: Red";
 
@@ -118,6 +127,10 @@ function update() {
 	healthImg.width = player.health * 2;
 	staminaImg.width = player.stamina * 2;	
 
+
+	for (var i = 0; i < obstaclesArray.length; i++){
+		game.physics.arcade.collide(player, obstaclesArray[i]);
+	}
 }
 
 // function checkOverlap(spriteA, spriteB) {

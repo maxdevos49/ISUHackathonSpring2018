@@ -37,6 +37,15 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.knockbackForce = 0;
 	this.recoveryForce = 30;
 
+	this.deathMessage = game.add.bitmapText(0, 0, 'carrier_command', "Wasted" , 35); 
+	this.deathMessage.tint = 0xff0000; 
+   	this.deathMessage.anchor.x = 0.5; 
+   	this.addChild(this.deathMessage); 
+   	this.deathMessage.visible = false; 
+ 
+   this.deathMessageTime = 200; 
+   this.curDeathTime = 0; 
+
 	game.add.existing(this);
 
 	this.sword = game.add.sprite(0, 0, "sword");
@@ -44,7 +53,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.sword.anchor.setTo(0.5, 0.5)
 	this.sword.enableBody = true;
 			
-	this.sword.damage = 10;
+	this.sword.damage = 35;
 	this.sword.knockbackForce = 500;
 
 	this.animations.add('walkDown',['down1', 'down2'], 0, true);
@@ -63,8 +72,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.stab = function() {
 	if (!this.isInCooldown && !this.isStabbing) {
-		this.isStabbing = true;
-		this.swordHitbox 		
+		this.isStabbing = true;	
 	}
 }
 

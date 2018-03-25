@@ -23,11 +23,11 @@ function update() {
 		direction = "down";
 	}
 
-	if (pad1.isDown(Phaser.Gamepad.XBOX360_LEFT_TRIGGER)) {
-		player.setPace(true);
-	} else {
-		player.setPace(false);
-	}
+	// if (pad1.isDown(Phaser.Gamepad.XBOX360_LEFT_TRIGGER)) {
+	// 	player.setPace(true);
+	// } else {
+	// 	player.setPace(false);
+	// }
 
 	if (pad1.isDown(Phaser.Gamepad.XBOX360_A)) {
 		player.stab();

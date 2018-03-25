@@ -182,3 +182,29 @@ for (var i = 0; i < 100; i++)
 	};
 
 }
+
+function getPotions(){
+
+	for (var i = 0; i < 4; i++)
+	{
+
+		var randomNumx = (Math.floor(Math.random() * 126) + 1) * 20;
+		var randomNumy = (Math.floor(Math.random() * 126) + 1) * 20;
+		var randomNumtype = Math.floor(Math.random() * 2);
+
+		potionData[i] = {
+			"x": randomNumx,
+			"y": randomNumy,
+			"type": randomNumtype
+		};
+
+	}
+
+	io.sockets.emit("addPotions", potionData);
+
+}
+
+
+
+
+

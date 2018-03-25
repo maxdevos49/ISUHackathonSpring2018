@@ -1,5 +1,5 @@
 /*global cursors:false, player:false, userId:false, socket:false,pad1:false, Phaser:false,cursorKeys:false,otherPlayers:false,
-healthImg:false, staminaImg:false,aKey:false,dKey:false,sKey:false,wKey:false,game:false,id:false,allSprite:false*/
+healthImg:false, staminaImg:false,aKey:false,dKey:false,sKey:false,wKey:false,game:false,id:false,allSprite:false, graves:false*/
 //jshint unused:false
 
 function update() {
@@ -113,6 +113,7 @@ function update() {
 
 	healthBar.text = "Health: " + player.health;
 	staminaBar.text = "Stamina: " + player.stamina;
+	deathBar.text = "Deaths: " + player.deaths;
 
 	healthImg.width = player.health * 2;
 	staminaImg.width = player.stamina * 2;	
@@ -131,8 +132,21 @@ function update() {
 // }
 
 function playerDeath() {
+	"use strict";
+	//var newGrave = game.add.sprite(player.x, player.y, 'grave');
+	//newGrave.scale.set(2,2);
+	//graves.push(newGrave);
+	socket.emit("sendGrave", {
+		"x": player.x,
+		"y": player.y,
+	});
 
-	var newGrave = game.add.sprite(player.x, player.y, 'grave');
-	graves.push(newGrave);
+	player.deaths += 1;
+	//socket.emit("addGrave", [graves]);
+	
+
+	player.x = 400;
+	player.y = 300;
+	player.health = 100;
 
 }

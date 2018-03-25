@@ -27,6 +27,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.health = 100;
 	this.stamina = 100;
 	this.requiredStaminaToStartRunning = 20;
+	this.deaths = 0;
 
 	this.isStabbing = false;
 	this.isInCooldown = false;
@@ -56,8 +57,8 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.sword.anchor.setTo(0.5, 0.5);
 	this.sword.enableBody = true;
 			
-	this.sword.damage = 35;
-	this.sword.knockbackForce = 500;
+	this.sword.damage = 20;
+	this.sword.knockbackForce = 800;
 
 	this.animations.add('walkDown',['down1', 'down2'], 0, true);
 	this.animations.add('walkUp', ['up1', 'up2'], 0, true);

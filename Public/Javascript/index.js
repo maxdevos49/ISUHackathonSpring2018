@@ -1,5 +1,5 @@
 //linter settings
-/*global console:false, io:false, Phaser:false, player:false*/
+/*global console:false, io:false, Phaser:false, player:false, otherPlayers:false */
 //jshint unused:false
 
 
@@ -61,8 +61,10 @@ function socketSetup(){
 		}
 	});
 
-	socket.on("addGraves", function(graves) {
-		addGraves(graves);
+	socket.on("sendGraves", function(data) {
+		console.log("here");
+		var newGrave = game.add.sprite(data.x, data.y, 'grave');
+		newGrave.scale.set(2,2);
 	});
 
 	socket.on("removeUser", function(data) {
@@ -98,9 +100,10 @@ function addUser(userData) {
 }
 
 function addGraves(data) {
-	console.log(data);
-	for (var i = 0; i < data.length; i++) {
-		graves.push(new Grave(game, data.xPos, data.yPos, data.id));
-	}
+	"use strict";
+	//console.log(data);
+	//for (var i = 0; i < data.length; i++) {
+		//graves.push(new Grave(game, data.xPos, data.yPos, data.id));
+	//}
 
 }

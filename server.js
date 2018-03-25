@@ -69,7 +69,7 @@ io.on("connection", function(socket){//this runs on first connection
     // Send all connected users to the new user
     var userDatas = [];
     for (var key in Object.keys(users)) {
-      if (users[key] == null) {
+      if ((key == null) || (users[key] == null)) {
         continue;  
       }
       userDatas.push(users[key].data);
@@ -100,7 +100,9 @@ io.on("connection", function(socket){//this runs on first connection
     var remainingUsers = {};
     for (var id in Object.keys(users)) {
       console.log(id);
-      if (users[id].socketId == socket.id) {
+      if ((id == null) || (users[id] == null)) {
+        continue;
+      } else if (users[id].socketId == socket.id) {
         io.sockets.emit("removeUser", {"id" : id})
       } else {
         remainingUsers[id] = users[id];

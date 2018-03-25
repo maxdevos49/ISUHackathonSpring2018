@@ -33,6 +33,7 @@ var deathBar;
 var obstacles;
 var type;
 var obstaclesArray = [];
+var fx;
 
 function create() {
 	"use strict";
@@ -49,6 +50,16 @@ function create() {
     layer.scale.set(1.40);
     layer.resizeWorld();
     //layer.debug = true;
+
+	//Sound
+	fx = game.add.audio('sfx');
+	fx.allowMultiple = true;
+
+	//Sound markers
+	fx.addMarker('walking', 0, 3.0);
+	fx.addMarker('sprinting', 3, 2.04);
+	fx.addMarker('swordSwoosh', 6, 0.06);
+	fx.addMarker('swordHit', 7, 0.10);
 
     for (let i = 0; i < 100; i++){
 
@@ -77,7 +88,7 @@ function create() {
     	obstaclesArray[i].body.collideWorldBounds = true;
     	obstaclesArray[i].body.immovable = true;
     	allSprites.push(obstaclesArray[i]);
-    	
+
 
     }
 
@@ -140,7 +151,7 @@ function create() {
 	staminaBar.addChild(staminaImg);
 
 
-	
+
 	hud.add(floor);
 	hud.add(usernameTxtBox);
 	hud.add(deathBar);

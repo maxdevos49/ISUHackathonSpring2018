@@ -56,13 +56,13 @@ function update() {
 		if(player.stamina > 0){
 			player.stamina -= 0.5;
 		}
-		
+
 	} else {
 		player.setPace(false);
 		if(player.stamina < 100){
 			player.stamina += 0.5;
 		}
-		
+
 	}
 
 	if (spaceKeyStroke.isDown) {
@@ -125,7 +125,7 @@ function update() {
 	deathBar.text = "Deaths: " + player.deaths;
 
 	healthImg.width = player.health * 2;
-	staminaImg.width = player.stamina * 2;	
+	staminaImg.width = player.stamina * 2;
 
 
 	for (var i = 0; i < obstaclesArray.length; i++){
@@ -156,7 +156,7 @@ function playerDeath() {
 
 	player.deaths += 1;
 	//socket.emit("addGrave", [graves]);
-	
+
 
 	player.x = 400;
 	player.y = 300;

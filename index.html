@@ -28,7 +28,7 @@
 		</div>
 
 		<nav>
-			<div id="infoNavElement">
+			<div class="navElement">
 				Visit the creators' Github profiles:
 			</div>
 
@@ -38,17 +38,23 @@
 				</div>
 			</a>
 
+			<div>|</div>
+
 			<a target="_blank" href="https://github.com/MasonLT199">
 				<div class="navElement">
 					Mason Timmerman
 				</div>
 			</a>
 
+			<div>|</div>
+
 			<a target="_blank" href="https://github.com/TomTheTornado">
 				<div class="navElement">
 					Thomas Powell
 				</div>
 			</a>
+
+			<div>|</div>
 
 			<a target="_blank" href="https://github.com/JosephNaberhaus">
 				<div class="navElement">
@@ -63,7 +69,7 @@
 
 	<div id="signIn">
 		<input type="text" id="usernameInput" placeholder="Username" value="Steve"></input>
-		<button id="playButton" onclick="init(document.getElementById('usernameInput').value); document.getElementById('signIn').style.visibility = 'hidden'; document.getElementById('signInInfo').style.visibility = 'hidden';">Play!</button>
+		<button id="playButton" onclick="init(document.getElementById('usernameInput').value); document.getElementById('signIn').style.display = 'none'; document.getElementById('signInInfo').style.display = 'none';">Play!</button>
 	</div>
 
 </body>

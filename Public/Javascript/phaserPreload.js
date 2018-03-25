@@ -19,5 +19,10 @@ function preload() {
 	game.load.image('PineTree', 'Images/PineTree.png');
 	game.load.image('OakTree', 'Images/OakTree.png');
 	game.load.image('Bush', 'Images/Bush.png');
+	game.load.audio('sfx', 'Music/AC_sfx.ogg');
+	game.load.audio('walking', 'Music/Walking.ogg');
+	game.load.audio('sprinting', 'Music/Sprinting.ogg');
+	game.load.audio('swordSwoosh', 'Music/SwordSwoosh.ogg');
+	game.load.audio('swordHit', 'Music/SwordHit.ogg');
 
 }

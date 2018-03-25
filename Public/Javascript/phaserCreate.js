@@ -19,7 +19,6 @@ var map;
 var layer;
 var pad1;
 var bmpText;
-// var controllerConnected;
 var usernameTxtBox;
 var healthBar;
 var staminaBar;

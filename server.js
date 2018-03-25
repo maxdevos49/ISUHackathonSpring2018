@@ -46,6 +46,8 @@ app.get('/index.html', (req, res) => {
 //init variables
 var users = {};
 var nextClientId = 0;
+var curGraveId = 0;
+var graves = [];
 
 //process socket request
 io.on("connection", function(socket){//this runs on first connection
@@ -75,13 +77,24 @@ io.on("connection", function(socket){//this runs on first connection
       userDatas.push(users[key].data);
     }
     socket.emit("addUsers", userDatas);
+    socket.emit("addGraves", graves);
 
+  });
+
+  socket.on("addGrave", function(grave) {
+    graves.push(grave);
+    socket.emit("addGraves", [grave]);
   });
 
   socket.on("userDataUpdate", function(userData) {
     //console.log("Updating for user with id: " + userData.id);
     users[userData.id].data = userData;
     io.sockets.emit("updateUser", userData);
+  });
+  
+  socket.on("nextGraveId", function() {
+    curGraveId++;
+    socket.emit("nextGraveId", curGraveId);
   });
 
   socket.on("disconnect", function() {

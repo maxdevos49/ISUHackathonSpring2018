@@ -26,7 +26,7 @@ var staminaBar;
 var serverStatus;
 var OnlineUsersTxt;
 var hud;
-
+var graves = [];
 
 function create() {
 	"use strict";
@@ -132,9 +132,6 @@ function create() {
 
 	serverStatus = game.add.bitmapText(550,0,'carrier_command', "serverStatus: ",10);
 	OnlineUsersTxt = game.add.bitmapText(550,15, 'carrier_command', "Players: " + connectedCount, 10);
-
-	//game.add.rectangle(100,100,100,100);
-
 	hud.add(usernameTxtBox);
 	hud.add(healthBar);
 	hud.add(staminaBar);

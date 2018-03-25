@@ -131,7 +131,18 @@ function update() {
 	for (var i = 0; i < obstaclesArray.length; i++){
 		game.physics.arcade.collide(player, obstaclesArray[i]);
 	}
+
+	// for (var i = 0; i < newPotion.length; i++){
+	// 	game.physics.arcade.collide(player, newPotion[i], potionHandler, null, this);
+	// }
 }
+
+function potionHandler(){
+
+
+	console.log("test");
+}
+
 
 // function checkOverlap(spriteA, spriteB) {
 

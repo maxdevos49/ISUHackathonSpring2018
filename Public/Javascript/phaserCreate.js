@@ -63,7 +63,7 @@ function create() {
 
     for (let i = 0; i < 100; i++){
 
-    	console.log(obstacleData[i].x);
+    	//console.log(obstacleData[i].x);
 
     	if(obstacleData[i].type === 0){
     		type = "Boulder";
@@ -83,7 +83,7 @@ function create() {
     	game.physics.enable(obstaclesArray[i], Phaser.Physics.ARCADE);
 
     	obstaclesArray[i].body.setSize(obstaclesArray[i].width/4, obstaclesArray[i].height/10, obstaclesArray[i].width/8, obstaclesArray[i].height/2.5);
-    	console.log(obstaclesArray[i].body);
+    	//console.log(obstaclesArray[i].body);
 
     	obstaclesArray[i].body.collideWorldBounds = true;
     	obstaclesArray[i].body.immovable = true;

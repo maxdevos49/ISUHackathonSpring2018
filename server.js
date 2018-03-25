@@ -183,6 +183,8 @@ for (var i = 0; i < 100; i++)
 
 }
 
+var potionData = [];
+
 function getPotions(){
 
 	for (var i = 0; i < 4; i++)
@@ -205,6 +207,6 @@ function getPotions(){
 }
 
 
-
+//setInterval(getPotions, 1000);
 
 

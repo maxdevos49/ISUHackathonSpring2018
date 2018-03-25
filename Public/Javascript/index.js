@@ -17,6 +17,7 @@ var mapData;
 var obstacleData;
 var floor;
 var newPotion = [];
+var type;
 
 //initial game start here called by html body
 function init(username){
@@ -42,10 +43,20 @@ function socketSetup(){
 	socket.emit("getMap");
 
 	socket.on("addPotions", function(data){
+		console.log(data[1].x);
 		for (var i = 0; i < data.length; i++){
 
-			var newPotion[i] = game.add.sprite(data[i].x, data[i].y, 'hPotion');
+			if(data[0].type == "0"){
+				type = "hPotion";
+			}else{
+				type = "sPotion";
+			}
+
+			newPotion[i] = game.add.sprite(data[i].x, data[i].y, type);
 			newPotion[i].scale.set(2,2);
+			game.world.bringToTop(newPotion[i]);
+			game.physics.arcade.enable([newPotion[i]], Phaser.Physics.ARCADE);
+			newPotion[i].body.collideWorldBounds = true;
 
 		}
 		

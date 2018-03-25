@@ -12,7 +12,7 @@ var socket;
 var game;
 var cursors;
 var myUsername;
-var connection;
+var connection = false;
 
 //initial game start here called by html body
 function init(username){
@@ -46,6 +46,7 @@ function socketSetup(){
 			if (userDatas[i].player.playerId !== id) {
 				console.log(userDatas[i]);
 				addUser(userDatas[i]);
+				connection = true;
 			}
 		}
 	});
@@ -72,6 +73,10 @@ function socketSetup(){
 				otherPlayers.splice(i, 1);
 			}
 		}
+	});
+
+	socket.on("disconnect", function(data){
+		connection = false;
 	});
 
 }

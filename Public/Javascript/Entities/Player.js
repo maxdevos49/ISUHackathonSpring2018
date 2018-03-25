@@ -77,7 +77,7 @@ Player.prototype.setPace = function(sprint) {
 }
 
 Player.prototype.isDead = function() {
-	return health <= 0;
+	return this.health <= 0;
 }
 
 Player.prototype.onHit = function(weapon, attackerId) {

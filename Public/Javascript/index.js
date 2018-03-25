@@ -38,6 +38,7 @@ function socketSetup(){
 	socket.on("idAssign", function(data) {
 		id = data.id;
 		gameSetup();
+		connection = true;
 	});
 
 	socket.on("addUsers", function(userDatas) {
@@ -46,7 +47,6 @@ function socketSetup(){
 			if (userDatas[i].player.playerId !== id) {
 				console.log(userDatas[i]);
 				addUser(userDatas[i]);
-				connection = true;
 				connectedCount++;
 			}
 		}

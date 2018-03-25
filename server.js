@@ -69,8 +69,6 @@ io.on("connection", function(socket){//this runs on first connection
     // Send all connected users to the new user
     var userDatas = [];
     for (var key in Object.keys(users)) {
-      console.log(key); 
-      console.log("giving new client user data for user: " + users[key].data.id);
       if (users[key] == null) {
         continue;  
       }

@@ -14,5 +14,10 @@ function preload() {
 	game.load.image('grave', 'Images/gravestone.png');
 	game.load.image('health', 'Images/Health.png');
 	game.load.image('stamina', 'Images/Stamina.png');
+	game.load.image('bricks', 'Images/Brick.png');
+	game.load.image('Boulder', 'Images/Boulder.png');
+	game.load.image('PineTree', 'Images/PineTree.png');
+	game.load.image('OakTree', 'Images/OakTree.png');
+	game.load.image('Bush', 'Images/Bush.png');
 
 }

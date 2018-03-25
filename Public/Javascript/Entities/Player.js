@@ -47,8 +47,8 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
    	this.addChild(this.deathMessage); 
    	this.deathMessage.visible = false; 
  
-   this.deathMessageTime = 200; 
-   this.curDeathTime = 0; 
+   	this.deathMessageTime = 200; 
+   	this.curDeathTime = 0; 
 
 	game.add.existing(this);
 

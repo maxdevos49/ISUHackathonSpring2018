@@ -1,5 +1,5 @@
 //jshint unused:false
-/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false,myUsername: false, connectedCount:false*/
+/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false,myUsername: false, connectedCount:false, console:false,obstacleData:false, mapData:false*/
 var player;
 var otherPlayers = [];
 var allSprites = [];
@@ -30,52 +30,11 @@ var floor;
 var healthImg;
 var staminaImg;
 var deathBar;
+var obstacles;
+var type;
 
 function create() {
 	"use strict";
-
-	var mapData = '';
-
-	for (var y = 0; y < 128; y++)
-    {
-        for (var x = 0; x < 128; x++)
-        {
-            var randomNum = game.rnd.between(0,100);
-
-
-			if ((x === 0) && (y === 0)) {             //Top left fence
-				mapData += '6';
-			} else if ((x === 0) && (y === 127)) {    //Bottom left fence
-				mapData += '8';
-			} else if ((x === 127) && (y === 0)) {    //Top right fence
-				mapData += '5';
-			} else if ((x === 127) && (y === 127)) {  //Bottom right fence
-				mapData += '7';
-			} else if((y === 0) || (y === 127)) {     //Top and Bottom fence
-				mapData += '9';
-			} else if ((x === 0) || (x === 127)) {    //Left and Right fence
-				mapData += '3';
-			} else if(randomNum < 80) {
-            	mapData += '1';
-            } else if(randomNum < 85) {
-            	mapData += '2';
-            } else if(randomNum < 95) {
-            	mapData += '0';
-            } else if(randomNum <= 100) {
-            	mapData += '4';
-            }
-
-            if (x < 127)
-            {
-                mapData += ',';
-            }
-        }
-
-        if (y < 127)
-        {
-            mapData += "\n";
-        }
-    }
 
     game.cache.addTilemap('dynamicMap', null, mapData, Phaser.Tilemap.CSV);
 
@@ -88,8 +47,30 @@ function create() {
     layer.resizeWorld();
     //layer.debug = true;
 
+    for (let i = 0; i < 100; i++){
 
-    map.setCollision(4);
+    	console.log(obstacleData[i].x);
+
+    	if(obstacleData[i].type === 0){
+    		type = "Boulder";
+    	}else if(obstacleData[i].type === 1){
+    		type = "Bush";
+    	}else if(obstacleData[i].type === 2){
+    		type = "PineTree";
+    	}else if(obstacleData[i].type === 3){
+     		type = "OakTree";
+
+    	}
+
+    	obstacles = game.add.sprite(obstacleData[i].x,obstacleData[i].y,type);
+    	obstacles.scale.set(2,2);
+    	game.world.bringToTop(obstacles);
+
+    	//layer.addChild(obstacles);
+    }
+
+
+    //map.setCollision(4);
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -156,6 +137,10 @@ function create() {
 	hud.add(OnlineUsersTxt);
 
 	hud.fixedToCamera = true;
+
+
+	//var splashscreen = game.add.sprite(0,0,'bricks');
+
 
 	joinGame();
 

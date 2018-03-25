@@ -13,6 +13,8 @@ var game;
 var cursors;
 var myUsername;
 var connection = false;
+var mapData;
+var obstacleData;
 
 //initial game start here called by html body
 function init(username){
@@ -33,6 +35,13 @@ function socketSetup(){
 
 	socket = io.connect({
 		reconnection: false
+	});
+
+	socket.emit("getMap");
+
+	socket.on("sendMap", function(data){
+		mapData = data.map;
+		obstacleData = data.obstacle;
 	});
 
 	socket.on("idAssign", function(data) {
@@ -62,7 +71,7 @@ function socketSetup(){
 	});
 
 	socket.on("sendGraves", function(data) {
-		console.log("here");
+		//console.log("here");
 		var newGrave = game.add.sprite(data.x, data.y, 'grave');
 		newGrave.scale.set(2,2);
 	});

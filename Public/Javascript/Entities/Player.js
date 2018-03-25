@@ -41,14 +41,14 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.knockbackForce = 0;
 	this.recoveryForce = 30;
 
-	this.deathMessage = game.add.bitmapText(0, 0, 'carrier_command', "Wasted" , 35); 
-	this.deathMessage.tint = 0xff0000; 
-   	this.deathMessage.anchor.x = 0.5; 
-   	this.addChild(this.deathMessage); 
-   	this.deathMessage.visible = false; 
- 
-   	this.deathMessageTime = 200; 
-   	this.curDeathTime = 0; 
+	this.deathMessage = game.add.bitmapText(0, 0, 'carrier_command', "Wasted" , 35);
+	this.deathMessage.tint = 0xff0000;
+   	this.deathMessage.anchor.x = 0.5;
+   	this.addChild(this.deathMessage);
+   	this.deathMessage.visible = false;
+
+   	this.deathMessageTime = 200;
+   	this.curDeathTime = 0;
 
 	game.add.existing(this);
 
@@ -56,7 +56,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	game.physics.enable([this.sword], Phaser.Physics.ARCADE);
 	this.sword.anchor.setTo(0.5, 0.5);
 	this.sword.enableBody = true;
-			
+
 	this.sword.damage = 20;
 	this.sword.knockbackForce = 800;
 
@@ -77,7 +77,7 @@ Player.prototype.constructor = Player;
 Player.prototype.stab = function() {
 	"use strict";
 	if (!this.isInCooldown && !this.isStabbing) {
-		this.isStabbing = true;	
+		this.isStabbing = true;
 	}
 };
 
@@ -85,9 +85,10 @@ Player.prototype.setPace = function(sprint) {
 	"use strict";
 	if (sprint && this.stamina > this.requiredStaminaToStartRunning) {
 		this.curMoveSpeed = "sprint";
+		//x.play('sprinting');
 	} else {
 		this.curMoveSpeed = "normal";
-		
+		//fx.play('walking');
 	}
 };
 
@@ -101,7 +102,7 @@ Player.prototype.onHit = function(weapon, attackerId) {
 	console.log("Ouch");
 
 	if (!this.hasBeenStabbed) {
-	
+
 		this.health -= weapon.damage;
 
 		if (this.isDead()) {
@@ -237,7 +238,7 @@ Player.prototype.update = function() {
 				this.body.velocity.x = 0;
 				this.animations.play('walkDown',8, false);
 				break;
-		} 
+		}
 	} else {
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
@@ -318,4 +319,3 @@ Player.prototype.unpackData = function(data) {
 	this.hasBeenStabbed = data.hasBeenStabbed;
 	this.health = data.health;
 };
-

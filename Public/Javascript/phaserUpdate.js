@@ -102,6 +102,9 @@ function update() {
 	OnlineUsersTxt.text = "Players: " + connectedCount;
 	serverStatus.text = (connection === true) ? "Server Status: Green" : "Server Status: Red";
 
+	healthBar.text = "Health: " + player.health;
+	staminaBar.text = "Stamina: " + player.stamina;
+
 }
 
 // function checkOverlap(spriteA, spriteB) {

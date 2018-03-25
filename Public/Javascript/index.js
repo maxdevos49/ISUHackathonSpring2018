@@ -16,6 +16,7 @@ var connection = false;
 var mapData;
 var obstacleData;
 var floor;
+var newPotion = [];
 
 //initial game start here called by html body
 function init(username){
@@ -39,6 +40,17 @@ function socketSetup(){
 	});
 
 	socket.emit("getMap");
+
+	socket.on("addPotions", function(data){
+		for (var i = 0; i < data.length; i++){
+
+			var newPotion[i] = game.add.sprite(data[i].x, data[i].y, 'hPotion');
+			newPotion[i].scale.set(2,2);
+
+		}
+		
+
+	});
 
 	socket.on("sendMap", function(data){
 		mapData = data.map;

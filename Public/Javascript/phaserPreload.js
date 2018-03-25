@@ -12,5 +12,7 @@ function preload() {
 	game.load.spritesheet('sword', 'Images/sword.png', 1, 1, 1);
 	game.load.bitmapFont('carrier_command', 'Fonts/carrier_command.png','Fonts/carrier_command.xml');
 	game.load.image('grave', 'Images/gravestone.png');
+	game.load.image('health', 'Images/Health.png');
+	game.load.image('stamina', 'Images/Stamina.png');
 
 }

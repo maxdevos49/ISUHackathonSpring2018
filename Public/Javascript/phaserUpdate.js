@@ -105,6 +105,9 @@ function update() {
 	healthBar.text = "Health: " + player.health;
 	staminaBar.text = "Stamina: " + player.stamina;
 
+	healthImg.width = player.health * 2;
+	staminaImg.width = player.stamina * 2;	
+
 }
 
 // function checkOverlap(spriteA, spriteB) {

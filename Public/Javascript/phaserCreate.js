@@ -1,5 +1,5 @@
 //jshint unused:false
-/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false,myUsername: false*/
+/*global Player:false, game:false, userId, Phaser:false, id:false, joinGame:false,myUsername: false, connectedCount:false*/
 var player;
 var otherPlayers = [];
 var allSprites = [];
@@ -26,6 +26,9 @@ var serverStatus;
 var OnlineUsersTxt;
 var hud;
 var graves = [];
+var floor;
+var healthImg;
+var staminaImg;
 
 function create() {
 	"use strict";
@@ -131,6 +134,18 @@ function create() {
 
 	serverStatus = game.add.bitmapText(550,0,'carrier_command', "serverStatus: ",10);
 	OnlineUsersTxt = game.add.bitmapText(550,15, 'carrier_command', "Players: " + connectedCount, 10);
+
+	healthImg = game.add.image(90, 0, 'health');
+	healthImg.width = 200;
+	healthImg.height = 10;
+
+	staminaImg = game.add.image(90, 0, 'stamina');
+	staminaImg.width = 200;
+	staminaImg.height = 10;
+
+	healthBar.addChild(healthImg);
+	staminaBar.addChild(staminaImg);
+
 	hud.add(usernameTxtBox);
 	hud.add(healthBar);
 	hud.add(staminaBar);

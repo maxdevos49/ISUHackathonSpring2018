@@ -135,6 +135,7 @@ function update() {
 	// for (var i = 0; i < newPotion.length; i++){
 	// 	game.physics.arcade.collide(player, newPotion[i], potionHandler, null, this);
 	// }
+	game.world.bringToTop(hud);
 }
 
 function potionHandler(){

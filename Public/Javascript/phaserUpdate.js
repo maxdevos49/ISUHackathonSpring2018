@@ -1,5 +1,5 @@
 /*global cursors:false, player:false, userId:false, socket:false,pad1:false, Phaser:false,cursorKeys:false,otherPlayers:false,
-healthImg:false, staminaImg:false,aKey:false,dKey:false,sKey:false,wKey:false,game:false,id:false,allSprite:false, graves:false*/
+healthImg:false, staminaImg:false,aKey:false,dKey:false,sKey:false,wKey:false,game:false,id:false,allSprite:false, graves:false, console:false*/
 //jshint unused:false
 
 function update() {
@@ -89,7 +89,7 @@ function update() {
 		// 	}
 		// }
 		if (otherPlayers[i].isStabbing) {
-			game.physics.arcade.collide(player, otherPlayers[i].sword, function(player, sword) {player.onHit(sword, otherPlayers[i].playerId)});
+			game.physics.arcade.collide(player, otherPlayers[i].sword, function(player, sword) {player.onHit(sword, i)});
 		}
 	}
 
@@ -104,7 +104,7 @@ function update() {
 			.sort(function(sprite1, sprite2) {
 				return sprite1.y > sprite2.y;
 			});
-	for (var i = 0; i < allSpritesInCameraSorted.length; i++) {
+	for (i = 0; i < allSpritesInCameraSorted.length; i++) {
 		game.world.bringToTop(allSpritesInCameraSorted[i]);
 	}
 
@@ -128,46 +128,44 @@ function update() {
 	staminaImg.width = player.stamina * 2;
 
 
-	for (var i = 0; i < obstaclesArray.length; i++){
+	for (i = 0; i < obstaclesArray.length; i++){
 		game.physics.arcade.collide(player, obstaclesArray[i]);
 	}
 
-	// for (var i = 0; i < newPotion.length; i++){
-	// 	game.physics.arcade.collide(player, newPotion[i], potionHandler, null, this);
-	// }
+	for (i = 0; i < newPotion.length; i++){
+		game.physics.arcade.collide(player, newPotion[i], function(potionId) {potionHandler(i)});
+	}
+
 	game.world.bringToTop(hud);
 }
 
-function potionHandler(){
+function potionHandler(potionId){
 
+	if(newPotion[potionId].potionType == "sPotion"){
+		player.stamina += 50;
+	}else{
+		player.health = 100;
+	}
+	
 
-	console.log("test");
+	newPotion[potionId].destroy();
+
+	newPotion.splice(potionId,1);
+
+	console.log(newPotion);
 }
 
 
-// function checkOverlap(spriteA, spriteB) {
-
-//     var boundsA = spriteA.getBounds();
-//     var boundsB = spriteB.getBounds();
-//     console.log(boundsA);
-//     console.log(boundsB);
-
-//     return Phaser.Rectangle.intersects(boundsA, boundsB);
-
-// }
 
 function playerDeath() {
 	"use strict";
-	//var newGrave = game.add.sprite(player.x, player.y, 'grave');
-	//newGrave.scale.set(2,2);
-	//graves.push(newGrave);
+	
 	socket.emit("sendGrave", {
 		"x": player.x,
 		"y": player.y,
 	});
 
 	player.deaths += 1;
-	//socket.emit("addGrave", [graves]);
 
 
 	player.x = 400;

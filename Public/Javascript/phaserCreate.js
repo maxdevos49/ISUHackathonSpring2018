@@ -61,7 +61,7 @@ function create() {
 	fx.addMarker('swordSwoosh', 6, 0.06);
 	fx.addMarker('swordHit', 7, 0.10);
 
-    for (let i = 0; i < 100; i++){
+    for (let i = 0; i < 133; i++){
 
     	//console.log(obstacleData[i].x);
 

@@ -1,4 +1,4 @@
-/*global Phaser:false, Player:false*/
+/*global Phaser:false, Player:false, console:false*/
 Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	"use strict";
 	Phaser.Sprite.call(this, game, initialX, initialY, ((isAlly) ? 'player-ally' : 'player-enemy'));
@@ -16,7 +16,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.curMoveSpeed = "normal";
 	this.movementSpeeds = {
 		"normal":150,
-		"sprint":260
+		"sprint":300
 	};
 
 	var playerNametag;
@@ -58,7 +58,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 	this.sword.enableBody = true;
 
 	this.sword.damage = 20;
-	this.sword.knockbackForce = 800;
+	this.sword.knockbackForce = 400;
 
 	this.animations.add('walkDown',['down1', 'down2'], 0, true);
 	this.animations.add('walkUp', ['up1', 'up2'], 0, true);
@@ -99,7 +99,8 @@ Player.prototype.isDead = function() {
 
 Player.prototype.onHit = function(weapon, attackerId) {
 	"use strict";
-	console.log("Ouch");
+
+	//console.log("Ouch");
 
 	if (!this.hasBeenStabbed) {
 
@@ -109,25 +110,35 @@ Player.prototype.onHit = function(weapon, attackerId) {
 			// Give player points!
 			playerDeath();
 
+		}else{
+			this.hasBeenStabbed = true;
+			this.knockbackForce = weapon.knockbackForce;
 		}
 
-		this.hasBeenStabbed = true;
-		this.knockbackForce = weapon.knockbackForce;
+		
 
-		// Find direction from of sword from player
-		var dx = weapon.x - this.x;
-		var dy = weapon.y = this.y;
-		var angle = Math.atan2(dy, dx);
-		if (angle > 45 && angle <= 135) {
-			this.knockbackDirection = "up";
-		} else if (angle > 135 && angle <= 225) {
-			this.knockbackDirection = "left";
-		} else if (angle > 225 && angle <= 315) {
-			this.knockbackDirection = "down";
-		} else {
-			this.knockbackDirection = "right";
-		}
+		// // Find direction from of sword from player
+		// var dx = weapon.x - this.x;
+		// var dy = weapon.y - this.y;
 
+		// var angle = Math.atan2(dy, dx);
+
+		// angle = Math.abs((angle * 180)/ (Math.PI));
+		// console.log("Degrees: " + angle);
+
+
+		// if (angle > 45 && angle <= 135) {
+		// 	this.knockbackDirection = "up";
+		// } else if (angle > 135 && angle <= 225) {
+		// 	this.knockbackDirection = "left";
+		// } else if (angle > 225 && angle <= 315) {
+		// 	this.knockbackDirection = "down";
+		// } else {
+		// 	this.knockbackDirection = "right";
+		// }
+		console.log(attackerId);
+		this.knockbackDirection = otherPlayers[attackerId].direction;
+		console.log(this.knockbackDirection);
 	}
 
 };
@@ -142,7 +153,7 @@ Player.prototype.update = function() {
 	if (this.hasBeenStabbed) {
 		switch (this.knockbackDirection) {
 			case "up":
-				this.body.velocity.y = this.knockbackForce;
+				this.body.velocity.y = -this.knockbackForce;
 				break;
 			case "left":
 				this.body.velocity.x = -this.knockbackForce;
@@ -163,17 +174,9 @@ Player.prototype.update = function() {
 	} else {
 
 	if (this.curMoveSpeed == "sprinting" && this.stamina > 0) {
-		//this.stamina -= 1;
 		console.log(this.stamina);
 	} else if (this.curMoveSpeed == "sprinting") {
 		this.curMoveSpeed = "normal";
-	} else {
-		if (this.stamina <= 20) {
-			//this.stamina += 1;
-		} else {
-			//this.stamina += 5;
-			//this.stamina = (this.stamina > 100) ? 100 : stamina;
-		}
 	}
 
 	if (this.isStabbing) {
@@ -194,16 +197,16 @@ Player.prototype.update = function() {
 	if (this.isStabbing) {
 		switch (this.direction) {
 			case "left":
-				this.sword.body.setSize(-40,-10, 0, 11);
+				this.sword.body.setSize(50,10, -50, 0);
 				break;
 			case "right":
-				this.sword.body.setSize(40,10, 0, 8);
+				this.sword.body.setSize(50,10, 0, 0);
 				break;
 			case "up":
-				this.sword.body.setSize(10,-40, -14,-20);
+				this.sword.body.setSize(10,50, -5,-40);
 				break;
 			case "down":
-				this.sword.body.setSize(10,40, 6,20);
+				this.sword.body.setSize(10,50, -5,0);
 				break;
 		}
 	}

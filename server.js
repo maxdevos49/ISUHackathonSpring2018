@@ -168,11 +168,11 @@ for (var y = 0; y < 128; y++)
 
 var obstacleData = [];
 
-for (var i = 0; i < 100; i++)
+for (var i = 0; i < 133; i++)
 {
 	
-	var randomNumx = (Math.floor(Math.random() * 126) + 1) * 20;
-	var randomNumy = (Math.floor(Math.random() * 126) + 1) * 20;
+	var randomNumx = (Math.floor(Math.random() * 126) + 1) * 30;
+	var randomNumy = (Math.floor(Math.random() * 126) + 1) * 30;
 	var randomNumtype = Math.floor(Math.random() * 4);
 
 	obstacleData[i] = {
@@ -187,11 +187,11 @@ var potionData = [];
 
 function getPotions(){
 
-	for (var i = 0; i < 4; i++)
+	for (var i = 0; i < 10; i++)
 	{
 
-		var randomNumx = (Math.floor(Math.random() * 126) + 1) * 20;
-		var randomNumy = (Math.floor(Math.random() * 126) + 1) * 20;
+		var randomNumx = (Math.floor(Math.random() * 126) + 1) * 30;
+		var randomNumy = (Math.floor(Math.random() * 126) + 1) * 30;
 		var randomNumtype = Math.floor(Math.random() * 2);
 
 		potionData[i] = {
@@ -207,6 +207,6 @@ function getPotions(){
 }
 
 
-//setInterval(getPotions, 1000);
+setInterval(getPotions, 10000);
 
 

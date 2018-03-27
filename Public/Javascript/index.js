@@ -43,7 +43,7 @@ function socketSetup(){
 	socket.emit("getMap");
 
 	socket.on("addPotions", function(data){
-		console.log(data[1].x);
+		//console.log(data[1].x);
 		for (var i = 0; i < data.length; i++){
 
 			if(data[0].type == "0"){
@@ -52,11 +52,12 @@ function socketSetup(){
 				type = "sPotion";
 			}
 
-			newPotion[i] = game.add.sprite(data[i].x, data[i].y, type);
-			newPotion[i].scale.set(2,2);
-			game.world.bringToTop(newPotion[i]);
-			game.physics.arcade.enable([newPotion[i]], Phaser.Physics.ARCADE);
-			newPotion[i].body.collideWorldBounds = true;
+			var potion = game.add.sprite(data[i].x, data[i].y, type);
+			potion.scale.set(2,2);
+			potion.potionType = type;
+			game.world.bringToTop(potion);
+			game.physics.arcade.enable([potion], Phaser.Physics.ARCADE);
+			newPotion.push(potion);
 
 		}
 		

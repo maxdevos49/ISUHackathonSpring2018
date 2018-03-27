@@ -26,7 +26,7 @@ Player = function(game, isAlly, playerName, playerId, initialX, initialY) {
 
 	this.health = 100;
 	this.stamina = 100;
-	this.requiredStaminaToStartRunning = 20;
+	this.requiredStaminaToStartRunning = 0;
 	this.deaths = 0;
 
 	this.isStabbing = false;
@@ -162,18 +162,10 @@ Player.prototype.update = function() {
 
 	} else {
 
-	if (this.curMoveSpeed == "sprinting" && this.stamina > 0) {
-		//this.stamina -= 1;
+	if (this.curMoveSpeed == "sprint" && this.stamina > 0) {
 		console.log(this.stamina);
-	} else if (this.curMoveSpeed == "sprinting") {
+	} else if (this.curMoveSpeed == "sprint") {
 		this.curMoveSpeed = "normal";
-	} else {
-		if (this.stamina <= 20) {
-			//this.stamina += 1;
-		} else {
-			//this.stamina += 5;
-			//this.stamina = (this.stamina > 100) ? 100 : stamina;
-		}
 	}
 
 	if (this.isStabbing) {

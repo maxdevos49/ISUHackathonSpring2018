@@ -10,14 +10,15 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const ip = require('ip');
+const port = Process.env.PORT || 8080;
 
 
 
 //let the server listen on port 80
-server.listen(8080);
+server.listen(port);
 
 //tell console the server is running
-console.log(`Hackathon 2! IP is ${ip.address()}:8080`);
+console.log(`Hackathon 2! IP is ${ip.address()}:${port}`);
 
 //tell where to find page depended info. css/javascript/images/audio/and other stuff
 app.use(express.static('Public'));
